@@ -1,8 +1,9 @@
 package com.example.creditmarket.openAPI.crawling;
 
 
-import com.example.openapi_project.entity.EntityFProduct;
-import com.example.openapi_project.entity.EntityOption;
+
+import com.example.creditmarket.entity.EntityFProduct;
+import com.example.creditmarket.entity.EntityOption;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

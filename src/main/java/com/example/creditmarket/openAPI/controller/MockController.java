@@ -1,6 +1,6 @@
 package com.example.creditmarket.openAPI.controller;
 
-import com.example.openapi_project.service.impl.TestServiceImpl;
+import com.example.creditmarket.openAPI.service.impl.TestServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

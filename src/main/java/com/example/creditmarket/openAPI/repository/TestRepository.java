@@ -1,6 +1,7 @@
 package com.example.creditmarket.openAPI.repository;
 
-import com.example.openapi_project.entity.EntityFProduct;
+
+import com.example.creditmarket.entity.EntityFProduct;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,7 +1,8 @@
 package com.example.creditmarket.openAPI.service.impl;
 
-import com.example.openapi_project.repository.TestRepository;
-import com.example.openapi_project.service.TestService;
+
+import com.example.creditmarket.openAPI.repository.TestRepository;
+import com.example.creditmarket.openAPI.service.TestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
