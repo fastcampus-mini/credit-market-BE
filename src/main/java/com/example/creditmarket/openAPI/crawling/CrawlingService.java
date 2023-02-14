@@ -1,6 +1,8 @@
-package com.example.creditmarket.openAPI;
+package com.example.creditmarket.openAPI.crawling;
 
 
+import com.example.openapi_project.entity.EntityFProduct;
+import com.example.openapi_project.entity.EntityOption;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -14,28 +16,38 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
 
 @Service
 @RequiredArgsConstructor
-public class MockDataService {
+public class CrawlingService {
 
-    private final MockRepositoryCompany mockRepositoryCompany;
-    private final MockRepositoryFProduct mockRepositoryFProduct;
+    private final CrawlingRepositoryCompany crawlingRepositoryCompany;
+    private final CrawlingRepositoryFProduct crawlingRepositoryFProduct;
 
     private final String creditLoanProductsSearch = "creditLoanProductsSearch"; //개인신용대출
 
 
     @Value("${open.api_key}")
     private String accessKey;
-    private final String topFinGrpNo = "020000"; // 권역코드(은행)
+
+    ArrayList<String> topFinGrpNoList = new ArrayList<>(Arrays.asList("020000", "030200", "030300", "050000", "060000"));
     private final String pageNo = "1"; // 페이지 번호
 
-    public String callAPI() throws IOException, ParseException {
+    public String callAllAPI() throws IOException, ParseException {
+        for (int i = 0; i < topFinGrpNoList.size(); i++) {
+            callAPI(topFinGrpNoList.get(i));
+        }
+        return "success";
+    }
+
+    public String callAPI(String topFinGrpNo) throws IOException, ParseException {
         StringBuilder result = new StringBuilder();
         String urlStr = "http://finlife.fss.or.kr/finlifeapi/"+
-                creditLoanProductsSearch+
+                "creditLoanProductsSearch" + //개인신용대출
                 ".json?" +
                 "auth=" + accessKey +
                 "&topFinGrpNo=" + topFinGrpNo +
@@ -52,12 +64,12 @@ public class MockDataService {
         }
         urlConnection.disconnect();
         parsingJson(result.toString());
-        saveAPICompany(result.toString());
         saveAPIFProduct(result.toString());
+        saveAPIFPOption(result.toString());
         return result.toString();
     }
 
-    public void saveAPICompany(String json) throws ParseException{
+    public void saveAPIFProduct(String json) throws ParseException{
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(json);
         JSONObject jsonResult = (JSONObject) jsonObject.get("result");
@@ -65,25 +77,27 @@ public class MockDataService {
 
         for (int i = 0; i < jsonBaseList.size(); i++) {
             JSONObject bl = (JSONObject) jsonBaseList.get(i);
-            EntityCompany company = EntityCompany.builder()
-                    .conoprdtnm(bl.get("fin_co_no").toString() + bl.get("crdt_prdt_type").toString())
-                    .dcls_month(bl.get("dcls_month").toString())
-                    .fin_co_no(bl.get("fin_co_no").toString())
-                    .fin_prdt_cd(bl.get("fin_prdt_cd").toString())
-                    .crdt_prdt_type(bl.get("crdt_prdt_type").toString())
-                    .kor_co_nm(bl.get("kor_co_nm").toString())
-                    .fin_prdt_nm(bl.get("fin_prdt_nm").toString())
-                    .join_way(bl.get("join_way").toString())
-                    .cb_name(bl.get("cb_name").toString())
-                    .crdt_prdt_type_nm(bl.get("crdt_prdt_type_nm").toString())
-                    .dcls_strt_day(bl.get("dcls_strt_day").toString())
-                    .fin_co_subm_day(bl.get("fin_co_subm_day").toString())
+            EntityFProduct company = EntityFProduct.builder()
+                    .fproduct_id(bl.get("fin_co_no").toString() + bl.get("crdt_prdt_type").toString() )
+                    .fproduct_disclosure_month(bl.get("dcls_month").toString())
+                    .fproduct_company_id(bl.get("fin_co_no").toString())
+                    .fproduct_company_name(bl.get("kor_co_nm").toString())
+                    .fproduct_code(bl.get("fin_prdt_cd").toString())
+                    .fproduct_name(bl.get("fin_prdt_nm").toString())
+                    .fproduct_credit_product_type_code(Integer.parseInt(bl.get("crdt_prdt_type").toString()))
+                    .fproduct_credit_product_type_name(bl.get("crdt_prdt_type_nm").toString())
+                    .fproduct_join_method(bl.get("join_way").toString())
+                    .fproduct_credit_bureau_name(bl.get("cb_name").toString())
+                    .fproduct_disclosure_start_month(bl.get("dcls_strt_day").toString())
+                    .fproduct_submit_day(bl.get("fin_co_subm_day").toString())
+                    .fproduct_minimum_age(new ArrayList<>(Arrays.asList(10,20,30,40)).get((int)(Math.random()*4)))
+                    .fproduct_target_gender(new ArrayList<>(Arrays.asList("남","여")).get((int)(Math.random()*2)))
                     .build();
-            mockRepositoryCompany.save(company);
+            crawlingRepositoryCompany.save(company);
         }
     }
 
-    public void saveAPIFProduct(String json) throws ParseException{
+    public void saveAPIFPOption(String json) throws ParseException{
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(json);
         JSONObject jsonResult = (JSONObject) jsonObject.get("result");
@@ -91,22 +105,22 @@ public class MockDataService {
         try{
             for(int j=0; j<jsonOptionList.size(); j++){
                 JSONObject ol = (JSONObject) jsonOptionList.get(j);
-                Optional<EntityCompany> company = mockRepositoryCompany.findById(ol.get("fin_co_no").toString() + ol.get("crdt_prdt_type").toString());
-                EntityFProduct product = EntityFProduct.builder()
-                        .entityCompany(company.get())
-                        .crdt_lend_rate_type(ol.get("crdt_lend_rate_type").toString())
-                        .crdt_lend_rate_type_nm(ol.get("crdt_lend_rate_type_nm").toString())
-                        .crdt_grad_1(ol.get("crdt_grad_1") == null ? 0 : Double.valueOf(ol.get("crdt_grad_1").toString()))
-                        .crdt_grad_4(ol.get("crdt_grad_4") == null ? 0 : Double.valueOf(ol.get("crdt_grad_4").toString()))
-                        .crdt_grad_5(ol.get("crdt_grad_5") == null ? 0 : Double.valueOf(ol.get("crdt_grad_5").toString()))
-                        .crdt_grad_6(ol.get("crdt_grad_6") == null ? 0 : Double.valueOf(ol.get("crdt_grad_6").toString()))
-                        .crdt_grad_10(ol.get("crdt_grad_10") == null ? 0 : Double.valueOf(ol.get("crdt_grad_10").toString()))
-                        .crdt_grad_11(ol.get("crdt_grad_11") == null ? 0 : Double.valueOf(ol.get("crdt_grad_11").toString()))
-                        .crdt_grad_12(ol.get("crdt_grad_12") == null ? 0 : Double.valueOf(ol.get("crdt_grad_12").toString()))
-                        .crdt_grad_13(ol.get("crdt_grad_13") == null ? 0 : Double.valueOf(ol.get("crdt_grad_13").toString()))
-                        .crdt_grad_avg(ol.get("crdt_grad_avg") == null ? 0 : Double.valueOf(ol.get("crdt_grad_avg").toString()))
+                Optional<EntityFProduct> company = crawlingRepositoryCompany.findById(ol.get("fin_co_no").toString() + ol.get("crdt_prdt_type").toString());
+                EntityOption product = EntityOption.builder()
+                        .entityFProduct(company.get())
+                        .options_interest_code(ol.get("crdt_lend_rate_type").toString())
+                        .options_interest_type(ol.get("crdt_lend_rate_type_nm").toString())
+                        .options_crdt_grad_1(ol.get("crdt_grad_1") == null ? 0 : Double.valueOf(ol.get("crdt_grad_1").toString()))
+                        .options_crdt_grad_4(ol.get("crdt_grad_4") == null ? 0 : Double.valueOf(ol.get("crdt_grad_4").toString()))
+                        .options_crdt_grad_5(ol.get("crdt_grad_5") == null ? 0 : Double.valueOf(ol.get("crdt_grad_5").toString()))
+                        .options_crdt_grad_6(ol.get("crdt_grad_6") == null ? 0 : Double.valueOf(ol.get("crdt_grad_6").toString()))
+                        .options_crdt_grad_10(ol.get("crdt_grad_10") == null ? 0 : Double.valueOf(ol.get("crdt_grad_10").toString()))
+                        .options_crdt_grad_11(ol.get("crdt_grad_11") == null ? 0 : Double.valueOf(ol.get("crdt_grad_11").toString()))
+                        .options_crdt_grad_12(ol.get("crdt_grad_12") == null ? 0 : Double.valueOf(ol.get("crdt_grad_12").toString()))
+                        .options_crdt_grad_13(ol.get("crdt_grad_13") == null ? 0 : Double.valueOf(ol.get("crdt_grad_13").toString()))
+                        .options_crdt_grad_avg(ol.get("crdt_grad_avg") == null ? 0 : Double.valueOf(ol.get("crdt_grad_avg").toString()))
                         .build();
-                mockRepositoryFProduct.save(product);
+                crawlingRepositoryFProduct.save(product);
             }
         } catch (Exception e){
             e.printStackTrace();

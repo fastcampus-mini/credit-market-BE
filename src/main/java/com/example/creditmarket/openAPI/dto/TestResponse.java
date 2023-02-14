@@ -1,4 +1,4 @@
-package com.example.creditmarket.openAPI;
+package com.example.creditmarket.openAPI.dto;
 
 import lombok.*;
 
@@ -8,7 +8,7 @@ import lombok.*;
 @ToString
 @Builder
 
-public class MockResponse {
+public class TestResponse {
 
     private int fproduct_id;
     private String conoprdtnm;

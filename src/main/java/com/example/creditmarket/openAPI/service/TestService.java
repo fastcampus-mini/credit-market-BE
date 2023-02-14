@@ -1,9 +1,9 @@
-package com.example.creditmarket.openAPI;
+package com.example.creditmarket.openAPI.service;
 
 import java.util.List;
 
 
-public interface MockService {
+public interface TestService {
 
      List<Object[]> selectAllFProducts();
 
