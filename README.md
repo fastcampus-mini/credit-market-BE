@@ -45,7 +45,6 @@
         </a>
       </td>
      </tr>
-     
     <tr>
       <td align="center" width="150px">
         <img width="100%" src="https://avatars.githubusercontent.com/u/87680906?v=4"  alt=""/>
