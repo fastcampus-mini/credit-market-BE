@@ -22,7 +22,7 @@
       </br>
       <td align="center" width="150px">
         <img width="100%" src="https://avatars.githubusercontent.com/u/113500815?v=4"  alt=""/>
-        <center>FE. 팀원</center>
+        <center>BE. 팀원</center>
         <br/>
         <a href="https://github.com/JeYeongR">
           <img src="https://img.shields.io/badge/류제영-345ebf?style=flat-round&logo=GitHub&logoColor=white"/>
@@ -30,7 +30,7 @@
       </td>
       <td align="center" width="150px">
         <img width="100%" src="https://avatars.githubusercontent.com/u/102227839?v=4"  alt=""/>
-        <center>FE. 팀원</center>
+        <center>BE. 팀원</center>
         <br/>
         <a href="https://github.com/Ryusunshine">
           <img src="https://img.shields.io/badge/염류션-bf8534?style=flat-round&logo=GitHub&logoColor=white"/>
@@ -38,7 +38,7 @@
       </td>
       <td align="center" width="150px">
         <img width="100%" src="https://avatars.githubusercontent.com/u/107986524?v=4"  alt=""/>
-        <center>FE. 팀원</center>
+        <center>BE. 팀원</center>
         <br/>
         <a href="https://github.com/devSojoong">
           <img src="https://img.shields.io/badge/윤소중-34bfa6?style=flat-round&logo=GitHub&logoColor=white"/>
