@@ -39,8 +39,8 @@ public class EntityUser {
     @Column(name = "user_gender")
     private String user_gender;
 
-    @Column(name = "user_birthDate")
-    private String user_birthDate;
+    @Column(name = "user_birthdate")
+    private String user_birthdate;
 
     @Column(name = "user_job")
     private String user_job;
