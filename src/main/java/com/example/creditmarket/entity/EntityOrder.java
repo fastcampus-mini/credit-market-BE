@@ -35,9 +35,9 @@ public class EntityOrder {
 
     @ManyToOne(targetEntity = EntityUser.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_email")
-    private String user_email;
+    private EntityUser user;
 
     @ManyToOne(targetEntity = EntityFProduct.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "fproduct_id")
-    private Long fproduct_id;
+    private EntityFProduct fProduct;
 }
