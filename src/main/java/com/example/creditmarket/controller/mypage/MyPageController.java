@@ -5,6 +5,7 @@ import com.example.creditmarket.dto.OrderResponseDTO;
 import com.example.creditmarket.service.mypage.MyPageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,4 +28,8 @@ public class MyPageController {
         return myPageService.selectOrderList(page, userEmail);
     }
 
+    @PatchMapping("/buy/{orderId}")
+    public String updateOrder(@PathVariable Long orderId, String userEmail) {
+        return myPageService.updateOrder(orderId, userEmail);
+    }
 }
