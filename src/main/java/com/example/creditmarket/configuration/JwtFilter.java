@@ -46,6 +46,13 @@ public class JwtFilter extends OncePerRequestFilter {
         // Token 꺼내기
         String token = authorization.split(" ")[1].trim();
 
+        // log out 여부 확인
+        if (!userService.isValid(token)) {
+            log.error("Logged out user");
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         // Token Expired 여부 확인
         if (JwtUtil.isExpired(token, secretKey)) {
             log.error("Token is Expired");

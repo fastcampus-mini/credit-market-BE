@@ -10,6 +10,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequiredArgsConstructor
 public class UserController {
@@ -19,7 +22,7 @@ public class UserController {
     @PostMapping("/usersignup")
     public ResponseEntity<String> signup(UserSignUpRequest request) {
         userservice.signup(request);
-        return ResponseEntity.ok().body("success");
+        return ResponseEntity.ok().body("SIGNUP_SUCCESS");
     }
 
     @PostMapping("/userlogin")
@@ -30,6 +33,12 @@ public class UserController {
 
     @PostMapping("/AuthorizationTest")
     public ResponseEntity<String> review(Authentication authentication){
-        return ResponseEntity.ok().body(authentication.getName() + " 성공");
+        return ResponseEntity.ok().body(authentication.getName() + " SUCCESS");
+    }
+
+    @PostMapping("/userlogout")
+    public ResponseEntity<String> logout(HttpServletRequest request){
+        userservice.logout(request);
+        return ResponseEntity.ok().body("LOGOUT_SUCCESS");
     }
 }

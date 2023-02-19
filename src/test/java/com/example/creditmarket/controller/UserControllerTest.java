@@ -106,7 +106,7 @@ class UserControllerTest {
         String userPassword = "testPassword";
 
         when(userService.login(any(), any()))
-                .thenThrow(new AppException(ErrorCode.USERNAME_NOT_FOUND, ""));
+                .thenThrow(new AppException(ErrorCode.USERMAIL_NOT_FOUND, ""));
 
 
         mockMvc.perform(post("/userlogin")
