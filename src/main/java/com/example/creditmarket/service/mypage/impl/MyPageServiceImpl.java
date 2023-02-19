@@ -60,6 +60,22 @@ public class MyPageServiceImpl implements MyPageService {
                 .collect(Collectors.toList());
     }
 
+    //상품 취소
+    @Override
+    public String updateOrder(Long orderId, String userEmail) {
+        EntityUser user = userRepository.findById(userEmail)
+                .orElseThrow(() -> new IllegalArgumentException("없는 유저입니다."));
+
+        EntityOrder order = orderRepository.findByUserAndOrderId(user, orderId)
+                .orElseThrow(() -> new IllegalArgumentException("없는 상품입니다."));
+
+        order.setOrderStatus(0L);
+
+        orderRepository.save(order);
+
+        return "success";
+    }
+
     //구매 상품목록에 관심 상품표시를 체크하는 메서드
     private OrderResponseDTO checkedFavorite(EntityOrder order) {
         OrderResponseDTO responseDTO = new OrderResponseDTO(order);

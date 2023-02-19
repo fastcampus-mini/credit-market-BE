@@ -11,4 +11,6 @@ public interface MyPageService {
 
     List<OrderResponseDTO> selectOrderList(int page, String userEmail);
 
+    String updateOrder(Long orderId, String userEmail);
+
 }
