@@ -38,14 +38,13 @@ public class UserController {
 
     @PostMapping("/userlogout")
     public ResponseEntity<String> logout(HttpServletRequest request){
-        userservice.logout(request);
         return ResponseEntity.ok().body("LOGOUT_SUCCESS");
     }
 
     @PostMapping("/userpasswordcheck")
-    public UserInfoResponseDTO passwordCheck(UserLoginRequestDTO request){
+    public ResponseEntity<EntityUser> userpasswordCheck(UserLoginRequestDTO request){
         EntityUser user = userservice.passwordCheck(request.getUserEmail(), request.getUserPassword());
-        return new UserInfoResponseDTO(user);
+        return ResponseEntity.ok().body(user);
     }
 
     @PostMapping("/userinfoupdate")

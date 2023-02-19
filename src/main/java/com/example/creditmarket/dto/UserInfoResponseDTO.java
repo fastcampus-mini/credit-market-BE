@@ -4,6 +4,7 @@ import com.example.creditmarket.entity.EntityUser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+
 @Getter
 public class UserInfoResponseDTO {
 
