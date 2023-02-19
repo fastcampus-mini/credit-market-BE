@@ -1,7 +1,10 @@
 package com.example.creditmarket.controller;
 
+import com.example.creditmarket.controller.cart.CartController;
+import com.example.creditmarket.controller.mypage.MyPageController;
 import com.example.creditmarket.dto.UserLoginRequestDTO;
 import com.example.creditmarket.dto.UserSignUpRequestDTO;
+import com.example.creditmarket.entity.EntityUser;
 import com.example.creditmarket.exception.AppException;
 import com.example.creditmarket.exception.ErrorCode;
 import com.example.creditmarket.service.UserService;
@@ -29,6 +32,12 @@ class UserControllerTest {
     MockMvc mockMvc;
     @MockBean
     UserService userService;
+    @MockBean
+    SearchController searchController;
+    @MockBean
+    CartController cartController;
+    @MockBean
+    MyPageController myPageController;
     @Autowired
     ObjectMapper objectMapper;
 
@@ -134,5 +143,126 @@ class UserControllerTest {
                         .content(objectMapper.writeValueAsString(new UserLoginRequestDTO(userEmail, userPassword))))
                 .andDo(print())
                 .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @DisplayName("로그아웃 성공")
+    @WithMockUser
+    void logout_success() throws Exception {
+        mockMvc.perform(post("/userlogout")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("로그아웃 실패 - 로그인 안됨")
+    void logout_fail() throws Exception {
+        mockMvc.perform(post("/userlogout")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @DisplayName("유저 비밀번호 확인")
+    @WithMockUser
+    void checkPassword_success() throws Exception {
+        UserSignUpRequestDTO testUser = new UserSignUpRequestDTO(
+                "test@Email.com",
+                "testPassword",
+                "남",
+                "20010101",
+                "학생",
+                "마이너스한도대출",
+                "대출금리",
+                500L);
+        userService.signup(testUser);
+
+        when(userService.passwordCheck(any(), any()))
+                .thenReturn(EntityUser.builder()
+                        .userEmail("test@Email.com")
+                        .userPassword("testPassword")
+                        .userGender("남")
+                        .userBirthdate("20010101")
+                        .userJob("학생")
+                        .userPrefCreditProductTypeName("마이너스한도대출")
+                        .userPrefInterestType("대출금리")
+                        .userCreditScore(500L)
+                        .build());
+
+        String userEmail = "test@Email.com";
+        String userPassword = "testPassword";
+        mockMvc.perform(post("/userpasswordcheck")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(new UserLoginRequestDTO(userEmail, userPassword))))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("유저 비밀번호 실패 - password 틀림")
+    @WithMockUser
+    void checkPassword_fail() throws Exception {
+        UserSignUpRequestDTO testUser = new UserSignUpRequestDTO(
+                "test@Email.com",
+                "testPassword",
+                "남",
+                "20010101",
+                "학생",
+                "마이너스한도대출",
+                "대출금리",
+                500L);
+        userService.signup(testUser);
+
+        when(userService.passwordCheck(any(), any()))
+                .thenThrow(new AppException(ErrorCode.INVALID_PASSWORD, ""));
+
+
+        String userEmail = "test@Email.com";
+        String userPassword = "testPassword2";
+        mockMvc.perform(post("/userpasswordcheck")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(new UserLoginRequestDTO(userEmail, userPassword))))
+                .andDo(print())
+                .andExpect(status().isUnauthorized());
+    }
+
+
+    @Test
+    @DisplayName("회원정보 수정 성공")
+    @WithMockUser
+    void update_success() throws Exception {
+        UserSignUpRequestDTO testUser = new UserSignUpRequestDTO(
+                "test@Email.com",
+                "testPassword",
+                "남",
+                "20010101",
+                "학생",
+                "마이너스한도대출",
+                "대출금리",
+                500L);
+
+        userService.signup(testUser);
+
+        String userEmail = "test@Email.com";
+        String userPassword = "testPassword2";
+        String userGender = "남";
+        String userBirthDate = "20020101";
+        String userJob = "직장인";
+        String userPrefCreditProductTypeName = "마이너스한도대출";
+        String userPrefInterestType = "대출금리";
+        Long userCreditScore = 800L;
+
+        mockMvc.perform(post("/userinfoupdate")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(new UserSignUpRequestDTO(userEmail, userPassword, userGender, userBirthDate, userJob, userPrefCreditProductTypeName, userPrefInterestType, userCreditScore))))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 }

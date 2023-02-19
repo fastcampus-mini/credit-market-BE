@@ -9,6 +9,7 @@ import com.example.creditmarket.repository.TokenRepository;
 import com.example.creditmarket.repository.UserRepository;
 import com.example.creditmarket.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
@@ -74,7 +76,7 @@ public class UserService {
     }
 
     public String logout(HttpServletRequest request){
-        //userToken 없음
+        // userToken 없음
         // Token 꺼내기
         String token = request.getHeader(HttpHeaders.AUTHORIZATION).split(" ")[1].trim();
         tokenRepository.save(new EntityToken(token));
