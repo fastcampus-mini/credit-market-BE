@@ -1,9 +1,6 @@
 package com.example.creditmarket.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,12 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_user")
-@Data
-@Builder
-@RequiredArgsConstructor
 @AllArgsConstructor
+@Table(name = "tb_user")
+@NoArgsConstructor
+@Getter
+@Builder
 public class EntityUser {
+
+
 
     /*
     user_email
@@ -52,6 +51,6 @@ public class EntityUser {
     private String userPrefInterestType;
 
     @Column(name = "user_credit_score")
-    private int userCreditScore;
+    private Long userCreditScore;
 
 }
