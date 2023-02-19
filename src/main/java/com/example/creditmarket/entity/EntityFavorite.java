@@ -31,5 +31,5 @@ public class EntityFavorite {
 
     @ManyToOne(targetEntity = EntityFProduct.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "fproduct_id")
-    private EntityFProduct fProduct;
+    private EntityFProduct fproduct;
 }

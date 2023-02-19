@@ -31,27 +31,27 @@ public class EntityUser {
 
     @Id
     @Column(name = "user_email")
-    private String user_email;
+    private String userEmail;
 
     @Column(name = "user_password")
-    private String user_password;
+    private String userPassword;
 
     @Column(name = "user_gender")
-    private String user_gender;
+    private String userGender;
 
     @Column(name = "user_birthdate")
-    private String user_birthdate;
+    private String userBirthdate;
 
     @Column(name = "user_job")
-    private String user_job;
+    private String userJob;
 
     @Column(name = "user_pref_credit_product_type_name")
-    private String user_pref_credit_product_type_name;
+    private String userPrefCreditProductTypeName;
 
     @Column(name = "user_pref_interest_type")
-    private String user_pref_interest_type;
+    private String userPrefInterestType;
 
     @Column(name = "user_credit_score")
-    private int user_credit_score;
+    private int userCreditScore;
 
 }
