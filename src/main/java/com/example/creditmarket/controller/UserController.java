@@ -1,8 +1,9 @@
 package com.example.creditmarket.controller;
 
-
+import com.example.creditmarket.dto.UserInfoResponseDTO;
 import com.example.creditmarket.dto.UserLoginRequestDTO;
 import com.example.creditmarket.dto.UserSignUpRequestDTO;
+import com.example.creditmarket.entity.EntityUser;
 import com.example.creditmarket.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -39,5 +40,17 @@ public class UserController {
     public ResponseEntity<String> logout(HttpServletRequest request){
         userservice.logout(request);
         return ResponseEntity.ok().body("LOGOUT_SUCCESS");
+    }
+
+    @PostMapping("/userpasswordcheck")
+    public UserInfoResponseDTO passwordCheck(UserLoginRequestDTO request){
+        EntityUser user = userservice.passwordCheck(request.getUserEmail(), request.getUserPassword());
+        return new UserInfoResponseDTO(user);
+    }
+
+    @PostMapping("/userinfoupdate")
+    public ResponseEntity<String> infoUpdate(UserSignUpRequestDTO request){
+        userservice.infoUpdate(request.toEntity());
+        return ResponseEntity.ok().body("INFO_UPDATE_SUCCESS");
     }
 }

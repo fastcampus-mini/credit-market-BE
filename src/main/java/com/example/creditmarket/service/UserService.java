@@ -80,4 +80,21 @@ public class UserService {
         tokenRepository.save(new EntityToken(token));
         return "LOGOUT_SUCCESS";
     }
+
+    public EntityUser passwordCheck(String userEmail, String password){
+        //userEmail 없음
+        EntityUser selectedUser = userRepository.findByUserEmail(userEmail)
+                .orElseThrow(()->new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
+
+        //password 틀림
+        if (!encoder.matches(password, selectedUser.getUserPassword())) { //순서 중요. inputpassword, DBpassword
+            throw new AppException(ErrorCode.INVALID_PASSWORD, "비밀번호가 틀렸습니다.");
+        }
+        return selectedUser;
+    }
+
+    public String infoUpdate(EntityUser user){
+        userRepository.save(user);
+        return "success";
+    }
 }
