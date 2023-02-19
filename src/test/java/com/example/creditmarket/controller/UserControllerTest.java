@@ -1,7 +1,7 @@
 package com.example.creditmarket.controller;
 
-import com.example.creditmarket.dto.UserLoginRequest;
-import com.example.creditmarket.dto.UserSignUpRequest;
+import com.example.creditmarket.dto.UserLoginRequestDTO;
+import com.example.creditmarket.dto.UserSignUpRequestDTO;
 import com.example.creditmarket.exception.AppException;
 import com.example.creditmarket.exception.ErrorCode;
 import com.example.creditmarket.service.UserService;
@@ -49,7 +49,7 @@ class UserControllerTest {
         mockMvc.perform(post("/usersignup")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(new UserSignUpRequest(userEmail, userPassword, userGender, userBirthDate, userJob, userPrefCreditProductTypeName, userPrefInterestType, userCreditScore))))
+                        .content(objectMapper.writeValueAsString(new UserSignUpRequestDTO(userEmail, userPassword, userGender, userBirthDate, userJob, userPrefCreditProductTypeName, userPrefInterestType, userCreditScore))))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
@@ -74,7 +74,7 @@ class UserControllerTest {
         mockMvc.perform(post("/usersignup")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(new UserSignUpRequest(userEmail, userPassword, userGender, userBirthDate, userJob, userPrefCreditProductTypeName, userPrefInterestType, userCreditScore))))
+                        .content(objectMapper.writeValueAsString(new UserSignUpRequestDTO(userEmail, userPassword, userGender, userBirthDate, userJob, userPrefCreditProductTypeName, userPrefInterestType, userCreditScore))))
                 .andDo(print())
                 .andExpect(status().isConflict());
     }
@@ -93,7 +93,7 @@ class UserControllerTest {
         mockMvc.perform(post("/userlogin")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsBytes(new UserLoginRequest(userEmail, userPassword))))
+                        .content(objectMapper.writeValueAsBytes(new UserLoginRequestDTO(userEmail, userPassword))))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
@@ -112,7 +112,7 @@ class UserControllerTest {
         mockMvc.perform(post("/userlogin")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsBytes(new UserLoginRequest(userEmail, userPassword))))
+                        .content(objectMapper.writeValueAsBytes(new UserLoginRequestDTO(userEmail, userPassword))))
                 .andDo(print())
                 .andExpect(status().isNotFound());
     }
@@ -131,7 +131,7 @@ class UserControllerTest {
         mockMvc.perform(post("/userlogin")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(new UserLoginRequest(userEmail, userPassword))))
+                        .content(objectMapper.writeValueAsString(new UserLoginRequestDTO(userEmail, userPassword))))
                 .andDo(print())
                 .andExpect(status().isUnauthorized());
     }

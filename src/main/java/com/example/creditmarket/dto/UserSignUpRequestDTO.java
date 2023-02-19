@@ -3,13 +3,10 @@ package com.example.creditmarket.dto;
 import com.example.creditmarket.entity.EntityUser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @AllArgsConstructor
 @Getter
-public class UserSignUpRequest {
+public class UserSignUpRequestDTO {
 
 
     private String userEmail;

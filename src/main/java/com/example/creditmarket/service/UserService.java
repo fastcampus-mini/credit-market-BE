@@ -1,6 +1,6 @@
 package com.example.creditmarket.service;
 
-import com.example.creditmarket.dto.UserSignUpRequest;
+import com.example.creditmarket.dto.UserSignUpRequestDTO;
 import com.example.creditmarket.entity.EntityToken;
 import com.example.creditmarket.entity.EntityUser;
 import com.example.creditmarket.exception.AppException;
@@ -30,7 +30,7 @@ public class UserService {
     private String secretKey;
     private Long expiredMs = 1000 * 60 * 60 * 24 * 7L ; //일주일
 
-    public String signup(UserSignUpRequest request) {
+    public String signup(UserSignUpRequestDTO request) {
 
         //userEmail 중복 체크
         userRepository.findByUserEmail(request.getUserEmail())

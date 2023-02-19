@@ -1,8 +1,8 @@
 package com.example.creditmarket.controller;
 
 
-import com.example.creditmarket.dto.UserLoginRequest;
-import com.example.creditmarket.dto.UserSignUpRequest;
+import com.example.creditmarket.dto.UserLoginRequestDTO;
+import com.example.creditmarket.dto.UserSignUpRequestDTO;
 import com.example.creditmarket.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +10,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
@@ -20,13 +19,13 @@ public class UserController {
     private final UserService userservice;
 
     @PostMapping("/usersignup")
-    public ResponseEntity<String> signup(UserSignUpRequest request) {
+    public ResponseEntity<String> signup(UserSignUpRequestDTO request) {
         userservice.signup(request);
         return ResponseEntity.ok().body("SIGNUP_SUCCESS");
     }
 
     @PostMapping("/userlogin")
-    public ResponseEntity<String> login(UserLoginRequest request) {
+    public ResponseEntity<String> login(UserLoginRequestDTO request) {
         String token = userservice.login(request.getUserEmail(), request.getUserPassword());
         return ResponseEntity.ok().body(token);
     }
