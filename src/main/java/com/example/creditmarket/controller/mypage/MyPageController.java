@@ -1,6 +1,7 @@
 package com.example.creditmarket.controller.mypage;
 
 import com.example.creditmarket.dto.FavoriteResponseDTO;
+import com.example.creditmarket.dto.OrderResponseDTO;
 import com.example.creditmarket.service.mypage.MyPageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,11 @@ public class MyPageController {
     @GetMapping("/favor/{page}")
     public List<FavoriteResponseDTO> selectFavoriteList(@PathVariable int page, String userEmail) {
         return myPageService.selectFavoriteList(page, userEmail);
+    }
+
+    @GetMapping("/buy/{page}")
+    public List<OrderResponseDTO> selectOrderList(@PathVariable int page, String userEmail) {
+        return myPageService.selectOrderList(page, userEmail);
     }
 
 }
