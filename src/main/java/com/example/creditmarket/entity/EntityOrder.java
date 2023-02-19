@@ -25,13 +25,13 @@ public class EntityOrder {
     @Id
     @Column(name = "order_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long order_id;
+    private Long orderId;
 
     @Column(name = "order_status")
-    private Long order_status;
+    private Long orderStatus;
 
     @Column(name = "order_date")
-    private String order_date;
+    private String orderDate;
 
     @ManyToOne(targetEntity = EntityUser.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_email")
@@ -39,5 +39,5 @@ public class EntityOrder {
 
     @ManyToOne(targetEntity = EntityFProduct.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "fproduct_id")
-    private EntityFProduct fProduct;
+    private EntityFProduct fproduct;
 }
