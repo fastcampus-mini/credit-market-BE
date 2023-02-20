@@ -7,6 +7,80 @@
  
 <br/>
 
+## :hammer: 기술 스택 (Technologies Used)
+![Java](https://img.shields.io/badge/Java-007396?style=flat-round&logo=Java&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat-round&logo=Spring%20Boot&logoColor=white)
+![Spring Security](https://img.shields.io/badge/Spring%20Security-6DB33F?style=flat-round&logo=Spring&logoColor=white)
+![Spring Data JPA](https://img.shields.io/badge/Spring%20Data%20JPA-6DB33F?style=flat-round&logo=Spring&logoColor=white)
+![Springfox Swagger](https://img.shields.io/badge/Springfox%20Swagger-85EA2D?style=flat-round&logo=Swagger&logoColor=black)
+![Thymeleaf](https://img.shields.io/badge/Thymeleaf-005F0F?style=flat-round&logo=Thymeleaf&logoColor=white)
+
+![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=flat-round&logo=Bootstrap&logoColor=white)
+![Lombok](https://img.shields.io/badge/Lombok-BC2055?style=flat-round&logo=Lombok&logoColor=white)
+![JSON Web Tokens](https://img.shields.io/badge/JSON%20Web%20Tokens-000000?style=flat-round&logo=json-web-tokens)
+![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=flat-round&logo=MariaDB&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-round&logo=MySQL&logoColor=white)
+![Amazon Web Services](https://img.shields.io/badge/Amazon%20Web%20Services-232F3E?style=flat-round&logo=amazon-aws&logoColor=white)
+![JAXB](https://img.shields.io/badge/JAXB-FF6600?style=flat-round&logo=Java&logoColor=white)
+
+
+<br/><br/>
+
+
+## :triangular_ruler: 프로젝트 구조 (Project Structures)
+```
+📁 project/
+   📂 src/
+      📂 main/
+         📂 java/
+            📂 com.example.creditmarket/
+               📂 configuration/
+                  📄 AuthenticationCoonfig.java   // SecurityFilterChain - 인증과 인가
+                  📄 EncoderConfig.java           // BCryptPasswordEncoder - 비밀번호 인코딩
+                  📄 JwtFilter.java               // JwtFilter - Jwt 핸들러
+               📂 controller/
+               📂 dto/
+               📂 entity/
+                  📄 EntityCart.java
+                  📄 EntityFavorite.java
+                  📄 EntityFProduct.java
+                  📄 EntityOption.java
+                  📄 EntityOrder.java
+                  📄 EntityToken.java
+                  📄 EntityUser.java
+               📂 exception/
+                  📄 AppException.java            // AppException - RuntimeException
+                  📄 ErrorCode.java               // enum Errorcode
+                  📄 ExceptionManager.java        // AppException, RuntimeException 핸들러
+               📂 openAPI/
+                  📂 crawling/
+                     📄 CrawlingOpenAPI.java      // Domain for Crawling - 공공데이터를 가져오는 도메인
+                     📄 CrawlingRepositoryFProduct.java
+                     📄 CrawlingRepositoryOption.java
+                     📄 CrawlingService.java      // SendRequest, ParseJson, Save - 포스트요청, json파싱, db저장
+               📂 repository/
+               📂 service/
+               📂 utils/
+                  📄 JwtUtil.java                 // Methods for jwt - 토큰 생성, 유효기간 확인, 유저 이메일 추출
+         📂 resources/
+            📄 application.properties             // Configuration and keys - openAPI/토큰 key, DB연결
+      📂 test/
+         📂 java/
+            📂 com.example.creditmarket/
+               📂 controller/
+                  📄 UserControllerTest.java      // 회원가입, 로그인, 로그아웃, 비밀번호 확인, 회원정보 수정 기능 성공/실패 테스트
+```
+
+<br/><br/>
+
+
+
+## :floppy_disk: ER 다이어그램 (ER-Diagram with Cardinality Constraints)
+![image](https://user-images.githubusercontent.com/113500771/220207986-4ae94752-b934-46ef-b98a-f97a1b9a575b.png)
+
+
+<br/><br/>
+
 ## :sunglasses: Member
 
 <table border>
@@ -83,25 +157,3 @@
 </table>
 
 <br/><br/>
-
-## :hammer: 기술 스택 (Technologies Used)
-![Java](https://img.shields.io/badge/Java-007396?style=flat-round&logo=Java&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat-round&logo=Spring%20Boot&logoColor=white)
-![Spring Security](https://img.shields.io/badge/Spring%20Security-6DB33F?style=flat-round&logo=Spring&logoColor=white)
-![Spring Data JPA](https://img.shields.io/badge/Spring%20Data%20JPA-6DB33F?style=flat-round&logo=Spring&logoColor=white)
-![Springfox Swagger](https://img.shields.io/badge/Springfox%20Swagger-85EA2D?style=flat-round&logo=Swagger&logoColor=black)
-![Thymeleaf](https://img.shields.io/badge/Thymeleaf-005F0F?style=flat-round&logo=Thymeleaf&logoColor=white)
-
-![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=flat-round&logo=Bootstrap&logoColor=white)
-![Lombok](https://img.shields.io/badge/Lombok-BC2055?style=flat-round&logo=Lombok&logoColor=white)
-![JSON Web Tokens](https://img.shields.io/badge/JSON%20Web%20Tokens-000000?style=flat-round&logo=json-web-tokens)
-![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=flat-round&logo=MariaDB&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-round&logo=MySQL&logoColor=white)
-![Amazon Web Services](https://img.shields.io/badge/Amazon%20Web%20Services-232F3E?style=flat-round&logo=amazon-aws&logoColor=white)
-![JAXB](https://img.shields.io/badge/JAXB-FF6600?style=flat-round&logo=Java&logoColor=white)
-
-
-<br/><br/>
-
-## :floppy_disk: ER 다이어그램 (ER-Diagram with Cardinality Constraints)
-![image](https://user-images.githubusercontent.com/113500771/220200079-afb19476-4fee-4787-bb9c-8133624a3078.png)
