@@ -2,8 +2,8 @@
 
 # :moneybag: [Credit Market (Demo)](https://credit-market.netlify.app/)
 
-- 프로젝트 문서는 [<img src="https://img.shields.io/badge/Notion-000000?style=flat-round&logo=Notion&logoColor=white"/>](https://www.notion.so/Mini-Project-b53fa0f445ce4afbacebffd01a813965?pvs=4)에서 확인하실 수 있습니다.
-- 프로젝트 구조는 [<img src="https://img.shields.io/badge/Github Wiki-181717?style=flat-round&logo=Github&logoColor=white"/>](https://github.com/fastcampus-mini/credit-market-FE/wiki/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%EC%A1%B0)에서 확인하실 수 있습니다.
+- :page_with_curl: Check out project documents at [<img src="https://img.shields.io/badge/Notion-000000?style=flat-round&logo=Notion&logoColor=white"/>](https://www.notion.so/Mini-Project-b53fa0f445ce4afbacebffd01a813965?pvs=4)
+- :triangular_ruler: Check out project structures at [<img src="https://img.shields.io/badge/Github Wiki-181717?style=flat-round&logo=Github&logoColor=white"/>](https://github.com/fastcampus-mini/credit-market-FE/wiki/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%EC%A1%B0)
  
 <br/>
 
@@ -100,13 +100,6 @@
 ![Amazon Web Services](https://img.shields.io/badge/Amazon%20Web%20Services-232F3E?style=flat-round&logo=amazon-aws&logoColor=white)
 ![JAXB](https://img.shields.io/badge/JAXB-FF6600?style=flat-round&logo=Java&logoColor=white)
 
-
-
-
-
-### Docs
-
-[<img src="https://img.shields.io/badge/Notion-000000?style=flat-round&logo=Notion&logoColor=white"/>](https://www.notion.so/Mini-Project-b53fa0f445ce4afbacebffd01a813965?pvs=4) [<img src="https://img.shields.io/badge/Github Wiki-181717?style=flat-round&logo=Github&logoColor=white"/>](https://github.com/fastcampus-mini/credit-market-FE/wiki)
 
 <br/><br/>
 
