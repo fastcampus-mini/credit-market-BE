@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,13 +21,13 @@ public class UserController {
     private final UserService userservice;
 
     @PostMapping("/usersignup")
-    public ResponseEntity<String> signup(UserSignUpRequestDTO request) {
+    public ResponseEntity<String> signup(@RequestBody UserSignUpRequestDTO request) {
         userservice.signup(request);
         return ResponseEntity.ok().body("SIGNUP_SUCCESS");
     }
 
     @PostMapping("/userlogin")
-    public ResponseEntity<String> login(UserLoginRequestDTO request) {
+    public ResponseEntity<String> login(@RequestBody UserLoginRequestDTO request) {
         String token = userservice.login(request.getUserEmail(), request.getUserPassword());
         return ResponseEntity.ok().body(token);
     }
@@ -38,6 +39,7 @@ public class UserController {
 
     @PostMapping("/userlogout")
     public ResponseEntity<String> logout(HttpServletRequest request){
+        userservice.logout(request);
         return ResponseEntity.ok().body("LOGOUT_SUCCESS");
     }
 

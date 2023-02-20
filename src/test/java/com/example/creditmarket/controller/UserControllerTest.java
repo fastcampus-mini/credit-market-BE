@@ -1,7 +1,5 @@
 package com.example.creditmarket.controller;
 
-import com.example.creditmarket.controller.cart.CartController;
-import com.example.creditmarket.controller.mypage.MyPageController;
 import com.example.creditmarket.dto.UserLoginRequestDTO;
 import com.example.creditmarket.dto.UserSignUpRequestDTO;
 import com.example.creditmarket.entity.EntityUser;
