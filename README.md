@@ -105,3 +105,6 @@
 [<img src="https://img.shields.io/badge/Notion-000000?style=flat-round&logo=Notion&logoColor=white"/>](https://www.notion.so/Mini-Project-b53fa0f445ce4afbacebffd01a813965?pvs=4) [<img src="https://img.shields.io/badge/Github Wiki-181717?style=flat-round&logo=Github&logoColor=white"/>](https://github.com/fastcampus-mini/credit-market-FE/wiki)
 
 <br/><br/>
+
+## :floppy_disk: ER 다이어그램 (ER-Diagram with Cardinality Constraints)
+![image](https://user-images.githubusercontent.com/113500771/220200079-afb19476-4fee-4787-bb9c-8133624a3078.png)
