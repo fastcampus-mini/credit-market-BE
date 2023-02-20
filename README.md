@@ -91,6 +91,7 @@
 ![Thymeleaf](https://img.shields.io/badge/Thymeleaf-005F0F?style=flat-round&logo=Thymeleaf&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-round&logo=MySQL&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=flat-round&logo=Bootstrap&logoColor=white)
+
 ![Spring Security](https://img.shields.io/badge/Spring%20Security-6DB33F?style=flat-round&logo=Spring&logoColor=white)
 ![Lombok](https://img.shields.io/badge/Lombok-BC2055?style=flat-round&logo=Lombok&logoColor=white)
 ![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=flat-round&logo=MariaDB&logoColor=white)
