@@ -5,7 +5,7 @@ import com.example.creditmarket.dto.UserSignUpRequestDTO;
 import com.example.creditmarket.entity.EntityUser;
 import com.example.creditmarket.exception.AppException;
 import com.example.creditmarket.exception.ErrorCode;
-import com.example.creditmarket.openAPI.crawling.CrawlingOpenAPI;
+import com.example.creditmarket.openAPI.CrawlingOpenAPI;
 import com.example.creditmarket.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
