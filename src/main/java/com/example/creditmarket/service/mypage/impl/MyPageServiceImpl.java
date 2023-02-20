@@ -67,7 +67,7 @@ public class MyPageServiceImpl implements MyPageService {
         EntityOrder order = orderRepository.findByUserAndOrderId(user, orderId)
                 .orElseThrow(() -> new IllegalArgumentException("없는 상품입니다."));
 
-        order.setOrderStatus(0L);
+        order.setOrderStatus(0);
 
         orderRepository.save(order);
 
