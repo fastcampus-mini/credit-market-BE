@@ -18,7 +18,6 @@ public class CartController {
 
     private final CartService cartService;
 
-    //토큰 받기전에 임시로 email 받기
     @PostMapping
     public ResponseEntity<String> saveCart(@RequestBody CartSaveRequestDTO cartRequestDTO, Authentication authentication) {
         String result = cartService.saveCart(cartRequestDTO, authentication);
