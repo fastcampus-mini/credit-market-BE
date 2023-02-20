@@ -84,9 +84,20 @@
 
 <br/><br/>
 
-## :hammer: 기술 스택
+## :hammer: 기술 스택 (Technologies Used)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat-round&logo=Spring%20Boot&logoColor=white)
+![Java](https://img.shields.io/badge/Java-007396?style=flat-round&logo=Java&logoColor=white)
+![Spring Data JPA](https://img.shields.io/badge/Spring%20Data%20JPA-6DB33F?style=flat-round&logo=Spring&logoColor=white)
+![Thymeleaf](https://img.shields.io/badge/Thymeleaf-005F0F?style=flat-round&logo=Thymeleaf&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-round&logo=MySQL&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=flat-round&logo=Bootstrap&logoColor=white)
+![Spring Security](https://img.shields.io/badge/Spring%20Security-6DB33F?style=flat-round&logo=Spring&logoColor=white)
+![Lombok](https://img.shields.io/badge/Lombok-BC2055?style=flat-round&logo=Lombok&logoColor=white)
+![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=flat-round&logo=MariaDB&logoColor=white)
+![JSON Web Tokens](https://img.shields.io/badge/JSON%20Web%20Tokens-000000?style=flat-round&logo=json-web-tokens)
+![JAXB](https://img.shields.io/badge/JAXB-FF6600?style=flat-round&logo=Java&logoColor=white)
+![Springfox Swagger](https://img.shields.io/badge/Springfox%20Swagger-85EA2D?style=flat-round&logo=Swagger&logoColor=black)
 
-<img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat-round&logo=Spring Boot&logoColor=white"/>
 
 ### Docs
 
