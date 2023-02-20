@@ -5,6 +5,7 @@ import com.example.creditmarket.service.SearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.Nullable;
 import io.swagger.annotations.Api;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,10 +23,16 @@ public class SearchController {
                                                    @RequestParam(required = false, defaultValue = "") @Nullable String loan,
                                                    @RequestParam(required = false, defaultValue = "") @Nullable String age,
                                                    @RequestParam(required = false, defaultValue = "") @Nullable String gender,
-                                                   @RequestParam(required = false, defaultValue = "") @Nullable String interest,
+                                                   @RequestParam(required = false, defaultValue = "대출금리") @Nullable String interest,
                                                    @RequestParam(required = false, defaultValue = "0") @Nullable Double rate,
+                                                   Authentication authentication,
                                                    @RequestParam(required = false, defaultValue = "1") int page
                                                 ) {
-        return searchService.searchResult(keyword.trim(), loan.trim(), age.trim(), gender.trim(), interest.trim(), rate, (page-1));
+        String userEmail = "";
+        if(authentication == null){
+            return searchService.searchResult(keyword.trim(), loan.trim(), age.trim(), gender.trim(), interest.trim(), rate, userEmail, (page-1));
+        }
+        userEmail = authentication.getPrincipal().toString();
+        return searchService.searchResult(keyword.trim(), loan.trim(), age.trim(), gender.trim(), interest.trim(), rate, userEmail, (page-1));
     }
 }
