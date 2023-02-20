@@ -10,7 +10,7 @@ public class OrderResponseDTO {
 
     private Long orderId;
 
-    private Long orderStatus;
+    private int orderStatus;
 
     private String fproductCompanyName;
 

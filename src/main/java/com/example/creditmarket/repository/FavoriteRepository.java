@@ -15,4 +15,8 @@ public interface FavoriteRepository extends JpaRepository<EntityFavorite, Long> 
     List<EntityFavorite> findByUser(EntityUser user, Pageable pageable);
 
     boolean existsByUserAndFproduct(EntityUser user, EntityFProduct fproduct);
+
+    EntityFavorite findEntityFavoriteByFproductAndUser(EntityFProduct fproduct, EntityUser user);
+
 }
+
