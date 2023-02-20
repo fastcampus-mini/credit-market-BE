@@ -35,8 +35,8 @@ public class ProductServiceImpl implements ProductService {
     /**
      * 상품 구매
      */
-    public String buyProduct(String productId, UserLoginRequestDTO loginDto) {
-        EntityUser user = userRepository.findByUserEmail(loginDto.getUserEmail()).orElseThrow(
+    public String buyProduct(String productId, String userEmail) {
+        EntityUser user = userRepository.findByUserEmail(userEmail).orElseThrow(
                 ()-> new IllegalArgumentException("해당 아이디를 찾을수 없습니다."));
         EntityFProduct product = productRepository.findById(productId).orElseThrow(() ->
                 new IllegalArgumentException("해당 상품을 찾을수 없습니다"));
@@ -53,25 +53,24 @@ public class ProductServiceImpl implements ProductService {
     /**
      * 추천 게시글
      */
-    public List<RecommendResponseDto> recommendList(UserLoginRequestDTO loginDto) {
+    public List<RecommendResponseDto> recommendList(String userEmail) {
         List<RecommendResponseDto> list = new ArrayList<>();
-        EntityUser user = userRepository.findById(loginDto.getUserEmail()).orElseThrow();
+        EntityUser user = userRepository.findById(userEmail).orElseThrow();
         List<EntityFProduct> products = productRepository.findProductsByUserPref(user.getUserPrefCreditProductTypeName());
         for (EntityFProduct pr : products) {
             List<EntityOption> options = optionRepository.findOptionByProductIdAndType(pr.getFproduct_id(), user.getUserPrefInterestType());
             for (EntityOption op : options) {
-                RecommendResponseDto recommendResponseDto = new RecommendResponseDto(pr, op);
-                list.add(recommendResponseDto);}}
+                list.add(new RecommendResponseDto(pr, op));}}
         return list;
     }
 
     /**
      * 찜 추가
      */
-    public String favoriteService(String productId, UserLoginRequestDTO loginDto) {
+    public String favoriteService(String productId, String userEmail) {
         EntityFProduct product = productRepository.findById(productId).orElseThrow(() ->
                 new IllegalArgumentException("해당 상품을 찾을수 없습니다"));
-        EntityUser user = userRepository.findById(loginDto.getUserEmail()).orElseThrow(() ->
+        EntityUser user = userRepository.findById(userEmail).orElseThrow(() ->
                 new IllegalArgumentException("해당 회원을 찾을수 없습니다."));
         try{
             EntityFavorite favorite = favoriteRepository.findEntityFavoriteByFproductAndUser(product, user);
