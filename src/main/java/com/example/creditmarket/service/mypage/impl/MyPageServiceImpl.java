@@ -5,6 +5,8 @@ import com.example.creditmarket.dto.OrderResponseDTO;
 import com.example.creditmarket.entity.EntityFavorite;
 import com.example.creditmarket.entity.EntityOrder;
 import com.example.creditmarket.entity.EntityUser;
+import com.example.creditmarket.exception.AppException;
+import com.example.creditmarket.exception.ErrorCode;
 import com.example.creditmarket.repository.FavoriteRepository;
 import com.example.creditmarket.repository.OrderRepository;
 import com.example.creditmarket.repository.UserRepository;
@@ -26,13 +28,11 @@ public class MyPageServiceImpl implements MyPageService {
     private final UserRepository userRepository;
     private final FavoriteRepository favoriteRepository;
 
-    //나중에 토큰 받아서 이메일얻는 메서드 따로 만들기
     public List<FavoriteResponseDTO> selectFavoriteList(int page, Authentication authentication) {
         EntityUser user = getUser(authentication);
 
-        if (page < 1) { //예외 정하기
-//            throw new Exception("page는 1 이상이여야 합니다.");
-            return null;
+        if (page < 1) {
+            throw new AppException(ErrorCode.PAGE_INDEX_ZERO, "Page가 1보다 작습니다.");
         }
         PageRequest pageRequest = PageRequest.of(page - 1, 10, Sort.by("favoriteId").descending());
 
@@ -47,8 +47,7 @@ public class MyPageServiceImpl implements MyPageService {
         EntityUser user = getUser(authentication);
 
         if (page < 1) { //예외 정하기
-//            throw new Exception("page는 1 이상이여야 합니다.");
-            return null;
+            throw new AppException(ErrorCode.PAGE_INDEX_ZERO, "Page가 1보다 작습니다.");
         }
         PageRequest pageRequest = PageRequest.of(page - 1, 10, Sort.by("orderId").descending());
 
@@ -65,7 +64,7 @@ public class MyPageServiceImpl implements MyPageService {
         EntityUser user = getUser(authentication);
 
         EntityOrder order = orderRepository.findByUserAndOrderId(user, orderId)
-                .orElseThrow(() -> new IllegalArgumentException("없는 상품입니다."));
+                .orElseThrow(() -> new AppException(ErrorCode.ORDER_NOT_FOUND, orderId+"존재하지 않는 구매 상품입니다."));
 
         order.setOrderStatus(0L);
 
@@ -87,6 +86,6 @@ public class MyPageServiceImpl implements MyPageService {
     private EntityUser getUser(Authentication authentication) {
         String userEmail = authentication.getName();
         return userRepository.findById(userEmail)
-                .orElseThrow(() -> new IllegalArgumentException("없는 유저입니다."));
+                .orElseThrow(() -> new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
     }
 }
