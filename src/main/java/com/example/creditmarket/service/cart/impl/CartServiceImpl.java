@@ -14,6 +14,7 @@ import com.example.creditmarket.service.cart.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,9 +32,8 @@ public class CartServiceImpl implements CartService {
     private final FavoriteRepository favoriteRepository;
 
     @Override
-    public String saveCart(CartSaveRequestDTO cartRequestDTO, String userEmail) {
-        EntityUser user = userRepository.findById(userEmail) //예외처리 어떻게 할지
-                .orElseThrow(() -> new IllegalArgumentException("없는 유저입니다."));
+    public String saveCart(CartSaveRequestDTO cartRequestDTO, Authentication authentication) {
+        EntityUser user = getUser(authentication);
 
         String fproductId = cartRequestDTO.getFproductId();
         EntityFProduct fProduct = fProductRespository.findById(fproductId)
@@ -54,9 +54,8 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<CartResponseDTO> selectCartList(int page, String userEmail) {
-        EntityUser user = userRepository.findById(userEmail)
-                .orElseThrow(() -> new IllegalArgumentException("없는 유저입니다."));
+    public List<CartResponseDTO> selectCartList(int page, Authentication authentication) {
+        EntityUser user = getUser(authentication);
 
         if (page < 1) { //예외 정하기
 //            throw new Exception("page는 1 이상이여야 합니다.");
@@ -72,8 +71,13 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public String deleteCart(CartDeleteRequestDTO cartDeleteRequestDTO, String userEmail) {
+    public String deleteCart(CartDeleteRequestDTO cartDeleteRequestDTO, Authentication authentication) {
+        EntityUser user = getUser(authentication);
+
         List<EntityCart> cartList = cartDeleteRequestDTO.toEntity();
+
+        cartList.forEach(cart -> cartRepository.findByUserAndCartId(user, cart.getCartId())
+                .orElseThrow(() -> new IllegalArgumentException("없는 상품입니다.")));
 
         cartRepository.deleteAll(cartList);
 
@@ -88,4 +92,13 @@ public class CartServiceImpl implements CartService {
         }
         return responseDTO;
     }
+
+    //토큰에서 이메일을 꺼내고 회원인지 확인
+    private EntityUser getUser(Authentication authentication) {
+        String userEmail = authentication.getName();
+        return userRepository.findById(userEmail) //예외처리 어떻게 할지
+                .orElseThrow(() -> new IllegalArgumentException("없는 유저입니다."));
+    }
+
+
 }

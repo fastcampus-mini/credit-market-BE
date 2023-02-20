@@ -12,6 +12,7 @@ import com.example.creditmarket.service.mypage.MyPageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,9 +27,8 @@ public class MyPageServiceImpl implements MyPageService {
     private final FavoriteRepository favoriteRepository;
 
     //나중에 토큰 받아서 이메일얻는 메서드 따로 만들기
-    public List<FavoriteResponseDTO> selectFavoriteList(int page, String userEmail) {
-        EntityUser user = userRepository.findById(userEmail)
-                .orElseThrow(() -> new IllegalArgumentException("없는 유저입니다."));
+    public List<FavoriteResponseDTO> selectFavoriteList(int page, Authentication authentication) {
+        EntityUser user = getUser(authentication);
 
         if (page < 1) { //예외 정하기
 //            throw new Exception("page는 1 이상이여야 합니다.");
@@ -43,9 +43,8 @@ public class MyPageServiceImpl implements MyPageService {
                 .collect(Collectors.toList());
     }
 
-    public List<OrderResponseDTO> selectOrderList(int page, String userEmail) {
-        EntityUser user = userRepository.findById(userEmail)
-                .orElseThrow(() -> new IllegalArgumentException("없는 유저입니다."));
+    public List<OrderResponseDTO> selectOrderList(int page, Authentication authentication) {
+        EntityUser user = getUser(authentication);
 
         if (page < 1) { //예외 정하기
 //            throw new Exception("page는 1 이상이여야 합니다.");
@@ -62,14 +61,13 @@ public class MyPageServiceImpl implements MyPageService {
 
     //상품 취소
     @Override
-    public String updateOrder(Long orderId, String userEmail) {
-        EntityUser user = userRepository.findById(userEmail)
-                .orElseThrow(() -> new IllegalArgumentException("없는 유저입니다."));
+    public String updateOrder(Long orderId, Authentication authentication) {
+        EntityUser user = getUser(authentication);
 
         EntityOrder order = orderRepository.findByUserAndOrderId(user, orderId)
                 .orElseThrow(() -> new IllegalArgumentException("없는 상품입니다."));
 
-        order.setOrderStatus(0L);
+        order.setOrderStatus(0);
 
         orderRepository.save(order);
 
@@ -83,5 +81,12 @@ public class MyPageServiceImpl implements MyPageService {
             responseDTO.setFavorite(1);
         }
         return responseDTO;
+    }
+
+    //토큰에서 이메일을 꺼내고 회원인지 확인
+    private EntityUser getUser(Authentication authentication) {
+        String userEmail = authentication.getName();
+        return userRepository.findById(userEmail)
+                .orElseThrow(() -> new IllegalArgumentException("없는 유저입니다."));
     }
 }
