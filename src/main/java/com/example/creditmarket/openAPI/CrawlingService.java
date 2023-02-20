@@ -1,4 +1,4 @@
-package com.example.creditmarket.openAPI.crawling;
+package com.example.creditmarket.openAPI;
 
 
 
@@ -26,8 +26,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CrawlingService {
 
-    private final CrawlingRepositoryCompany crawlingRepositoryCompany;
     private final CrawlingRepositoryFProduct crawlingRepositoryFProduct;
+    private final CrawlingRepositoryOption crawlingRepositoryOption;
 
     private final String creditLoanProductsSearch = "creditLoanProductsSearch"; //개인신용대출
 
@@ -94,7 +94,7 @@ public class CrawlingService {
                     .fproduct_minimum_age(new ArrayList<>(Arrays.asList(10,20,30,40)).get((int)(Math.random()*4)))
                     .fproduct_target_gender(new ArrayList<>(Arrays.asList("남","여")).get((int)(Math.random()*2)))
                     .build();
-            crawlingRepositoryCompany.save(company);
+            crawlingRepositoryFProduct.save(company);
         }
     }
 
@@ -106,7 +106,7 @@ public class CrawlingService {
         try{
             for(int j=0; j<jsonOptionList.size(); j++){
                 JSONObject ol = (JSONObject) jsonOptionList.get(j);
-                Optional<EntityFProduct> company = crawlingRepositoryCompany.findById(ol.get("fin_co_no").toString() + ol.get("crdt_prdt_type").toString());
+                Optional<EntityFProduct> company = crawlingRepositoryFProduct.findById(ol.get("fin_co_no").toString() + ol.get("crdt_prdt_type").toString());
                 EntityOption product = EntityOption.builder()
                         .entityFProduct(company.get())
                         .options_interest_code(ol.get("crdt_lend_rate_type").toString())
@@ -121,7 +121,7 @@ public class CrawlingService {
                         .options_crdt_grad_13(ol.get("crdt_grad_13") == null ? 0 : Double.valueOf(ol.get("crdt_grad_13").toString()))
                         .options_crdt_grad_avg(ol.get("crdt_grad_avg") == null ? 0 : Double.valueOf(ol.get("crdt_grad_avg").toString()))
                         .build();
-                crawlingRepositoryFProduct.save(product);
+                crawlingRepositoryOption.save(product);
             }
         } catch (Exception e){
             e.printStackTrace();
