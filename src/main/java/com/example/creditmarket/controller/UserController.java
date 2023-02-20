@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @PostMapping("/AuthorizationTest")
-    public ResponseEntity<String> review(Authentication authentication){
+    public ResponseEntity<String> review(@RequestBody Authentication authentication){
         return ResponseEntity.ok().body(authentication.getName() + " SUCCESS");
     }
 
@@ -44,13 +44,13 @@ public class UserController {
     }
 
     @PostMapping("/userpasswordcheck")
-    public ResponseEntity<EntityUser> userpasswordCheck(UserLoginRequestDTO request){
+    public ResponseEntity<EntityUser> userpasswordCheck(@RequestBody UserLoginRequestDTO request){
         EntityUser user = userservice.passwordCheck(request.getUserEmail(), request.getUserPassword());
         return ResponseEntity.ok().body(user);
     }
 
     @PostMapping("/userinfoupdate")
-    public ResponseEntity<String> infoUpdate(UserSignUpRequestDTO request){
+    public ResponseEntity<String> infoUpdate(@RequestBody UserSignUpRequestDTO request){
         userservice.infoUpdate(request.toEntity());
         return ResponseEntity.ok().body("INFO_UPDATE_SUCCESS");
     }
