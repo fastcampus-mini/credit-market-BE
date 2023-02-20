@@ -2,7 +2,9 @@ package com.example.creditmarket.service;
 
 import com.example.creditmarket.dto.MainListResponseDto;
 import com.example.creditmarket.entity.EntityOption;
+import com.example.creditmarket.entity.EntityUser;
 import com.example.creditmarket.repository.OptionRepository;
+import com.example.creditmarket.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SearchService {
     private final OptionRepository optionRepository;
+    private final UserRepository userRepository;
 
     /**
      * 키워드와 카테고리 검색 서비스
@@ -29,19 +32,40 @@ public class SearchService {
      */
     public List<MainListResponseDto> searchResult(String keyword, String loan, String age,
                                                   String gender, String interest, Double rate,
-                                                  int page) {
+                                                  String userId, int page) {
         Pageable pageable = PageRequest.of(page, 10);
+        Page<Object[]> result;
+        EntityUser entityUser;
         if (rate == 0 || rate == null) rate = 20.0;
-        Page<EntityOption> result = optionRepository.search(loan, age, gender, interest, rate, keyword, pageable);
-        List<EntityOption> lists = result.getContent();
+        if(userId.equals("")) {
+            result = optionRepository.search(loan, age, gender, interest, rate, keyword, null, pageable);
+        } else {
+            entityUser = userRepository.findByUserEmail(userId).get();
+            result = optionRepository.search(loan, age, gender, interest, rate, keyword, entityUser, pageable);
+        }
+        List<Object[]> lists = result.getContent();
         if (lists != null || lists.size() != 0) {
             List<MainListResponseDto> mainListResponseListDto = new ArrayList<>();
             for (int i = 0; i < lists.size(); i++) {
-                mainListResponseListDto.add(i, new MainListResponseDto(lists.get(i).getEntityFProduct().getFproduct_company_name(),
-                        lists.get(i).getEntityFProduct().getFproduct_name(),
-                        lists.get(i).getEntityFProduct().getFproduct_credit_product_type_name(),
-                        lists.get(i).getOptions_crdt_grad_avg()
+                EntityOption resEntityOption = (EntityOption)lists.get(i)[0];
+                // 해당 유저의 관심상품이 있는 경우
+                if(lists.get(i)[1] != null) {
+                mainListResponseListDto.add(i, new MainListResponseDto(resEntityOption.getEntityFProduct().getFproduct_company_name(),
+                        resEntityOption.getEntityFProduct().getFproduct_name(),
+                        resEntityOption.getEntityFProduct().getFproduct_credit_product_type_name(),
+                        resEntityOption.getOptions_crdt_grad_avg(),
+                        resEntityOption.getOptions_interest_type(),
+                        true
                 ));
+                } else {
+                    mainListResponseListDto.add(i, new MainListResponseDto(resEntityOption.getEntityFProduct().getFproduct_company_name(),
+                            resEntityOption.getEntityFProduct().getFproduct_name(),
+                            resEntityOption.getEntityFProduct().getFproduct_credit_product_type_name(),
+                            resEntityOption.getOptions_crdt_grad_avg(),
+                            resEntityOption.getOptions_interest_type(),
+                            false
+                    ));
+                }
             }
             return mainListResponseListDto;
         }
