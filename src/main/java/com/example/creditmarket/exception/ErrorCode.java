@@ -9,7 +9,12 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
     USERMAIL_DUPLICATED(HttpStatus.CONFLICT, ""),
     USERMAIL_NOT_FOUND(HttpStatus.NOT_FOUND, ""),
-    INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "");
+    INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, ""),
+    CART_NOT_FOUND(HttpStatus.NOT_FOUND, ""),
+    PRODUCT_NOT_FOUND(HttpStatus.NOT_FOUND, ""),
+    PAGE_INDEX_ZERO(HttpStatus.BAD_REQUEST, ""),
+    ORDER_NOT_FOUND(HttpStatus.NOT_FOUND, "");
+
 
     private HttpStatus httpStatus;
     private String message;
