@@ -36,6 +36,8 @@ class UserControllerTest {
     CartController cartController;
     @MockBean
     MyPageController myPageController;
+    @MockBean
+    ProductController productController;
     @Autowired
     ObjectMapper objectMapper;
 
