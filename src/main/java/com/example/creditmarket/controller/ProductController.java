@@ -1,9 +1,8 @@
 package com.example.creditmarket.controller;
 
-import com.example.creditmarket.dto.ProductDetailDto;
-import com.example.creditmarket.dto.RecommendResponseDto;
-import com.example.creditmarket.dto.UserLoginRequestDTO;
-import com.example.creditmarket.service.product.ProductService;
+import com.example.creditmarket.dto.response.ProductDetailResponseDTO;
+import com.example.creditmarket.dto.response.RecommendResponseDTO;
+import com.example.creditmarket.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,7 @@ public class ProductController {
 
     @ApiOperation(value = "상품 상세페이지", notes = "상품의 상세페이지를 보여줍니다.")
     @GetMapping("/item/{id}")
-    public ProductDetailDto itemDetail(@PathVariable String id){
+    public ProductDetailResponseDTO itemDetail(@PathVariable String id){
         return productService.getProductDetail(id);
     }
 
@@ -34,7 +33,7 @@ public class ProductController {
 
     @ApiOperation(value = "상품 추천", notes = "회원의 선호하는 대출상품과 금리에 따라 상품을 추천해줍니다")
     @GetMapping("/recommend")
-    public List<RecommendResponseDto> recommendList(Authentication authentication){
+    public List<RecommendResponseDTO> recommendList(Authentication authentication){
         String userEmail = authentication.getName();
         return productService.recommendList(userEmail);
     }

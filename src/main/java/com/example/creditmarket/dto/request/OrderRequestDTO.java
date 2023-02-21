@@ -1,4 +1,4 @@
-package com.example.creditmarket.dto;
+package com.example.creditmarket.dto.request;
 
 import com.example.creditmarket.entity.EntityFProduct;
 import com.example.creditmarket.entity.EntityOrder;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class OrderRequestDto {
+public class OrderRequestDTO {
 
     private Long orderId;
 

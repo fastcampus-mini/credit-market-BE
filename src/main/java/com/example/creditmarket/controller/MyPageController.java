@@ -1,8 +1,8 @@
 package com.example.creditmarket.controller;
 
-import com.example.creditmarket.dto.FavoriteResponseDTO;
-import com.example.creditmarket.dto.OrderResponseDTO;
-import com.example.creditmarket.service.mypage.MyPageService;
+import com.example.creditmarket.dto.response.FavoriteResponseDTO;
+import com.example.creditmarket.dto.response.OrderResponseDTO;
+import com.example.creditmarket.service.MyPageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;

@@ -1,12 +1,12 @@
 package com.example.creditmarket.controller;
 
-import com.example.creditmarket.dto.UserLoginRequestDTO;
-import com.example.creditmarket.dto.UserSignUpRequestDTO;
+import com.example.creditmarket.dto.request.UserLoginRequestDTO;
+import com.example.creditmarket.dto.response.UserSignUpRequestDTO;
 import com.example.creditmarket.entity.EntityUser;
 import com.example.creditmarket.exception.AppException;
 import com.example.creditmarket.exception.ErrorCode;
 import com.example.creditmarket.openAPI.CrawlingOpenAPI;
-import com.example.creditmarket.service.UserService;
+import com.example.creditmarket.service.Impl.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ class UserControllerTest {
     @Autowired
     MockMvc mockMvc;
     @MockBean
-    UserService userService;
+    UserServiceImpl userServiceImpl;
     @MockBean
     SearchController searchController;
     @MockBean
@@ -80,7 +80,7 @@ class UserControllerTest {
         String userPrefInterestType = "대출금리";
         Long userCreditScore = 700L;
 
-        when(userService.signup(any()))
+        when(userServiceImpl.signup(any()))
                 .thenThrow(new RuntimeException("해당 userId가 중복됩니다."));
 
         mockMvc.perform(post("/usersignup")
@@ -98,7 +98,7 @@ class UserControllerTest {
         String userEmail = "test@Email.com";
         String userPassword = "testPassword";
 
-        when(userService.login(any(), any()))
+        when(userServiceImpl.login(any(), any()))
                 .thenReturn("token");
 
 
@@ -117,7 +117,7 @@ class UserControllerTest {
         String userEmail = "test@Email.com";
         String userPassword = "testPassword";
 
-        when(userService.login(any(), any()))
+        when(userServiceImpl.login(any(), any()))
                 .thenThrow(new AppException(ErrorCode.USERMAIL_NOT_FOUND, ""));
 
 
@@ -136,7 +136,7 @@ class UserControllerTest {
         String userEmail = "test@Email.com";
         String userPassword = "testPassword";
 
-        when(userService.login(any(), any()))
+        when(userServiceImpl.login(any(), any()))
                 .thenThrow(new AppException(ErrorCode.INVALID_PASSWORD, ""));
 
 
@@ -182,9 +182,9 @@ class UserControllerTest {
                 "마이너스한도대출",
                 "대출금리",
                 500L);
-        userService.signup(testUser);
+        userServiceImpl.signup(testUser);
 
-        when(userService.passwordCheck(any(), any()))
+        when(userServiceImpl.passwordCheck(any(), any()))
                 .thenReturn(EntityUser.builder()
                         .userEmail("test@Email.com")
                         .userPassword("testPassword")
@@ -219,9 +219,9 @@ class UserControllerTest {
                 "마이너스한도대출",
                 "대출금리",
                 500L);
-        userService.signup(testUser);
+        userServiceImpl.signup(testUser);
 
-        when(userService.passwordCheck(any(), any()))
+        when(userServiceImpl.passwordCheck(any(), any()))
                 .thenThrow(new AppException(ErrorCode.INVALID_PASSWORD, ""));
 
 
@@ -250,7 +250,7 @@ class UserControllerTest {
                 "대출금리",
                 500L);
 
-        userService.signup(testUser);
+        userServiceImpl.signup(testUser);
 
         String userEmail = "test@Email.com";
         String userPassword = "testPassword2";

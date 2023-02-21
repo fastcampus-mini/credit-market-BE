@@ -1,4 +1,4 @@
-package com.example.creditmarket.dto;
+package com.example.creditmarket.dto.response;
 
 import com.example.creditmarket.entity.EntityOrder;
 import lombok.Getter;

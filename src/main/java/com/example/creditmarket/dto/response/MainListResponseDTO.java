@@ -1,4 +1,4 @@
-package com.example.creditmarket.dto;
+package com.example.creditmarket.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MainListResponseDto {
+public class MainListResponseDTO {
     private String companyName; // 은행
     private String productName; // 대출 상품
     private String productTypeName; // 대출 종류

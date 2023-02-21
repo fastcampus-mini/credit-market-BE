@@ -1,6 +1,6 @@
 package com.example.creditmarket.configuration;
 
-import com.example.creditmarket.service.UserService;
+import com.example.creditmarket.service.Impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuthenticationConfig {
 
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
     @Value("${jwt.token.secret}")
     private String secretKey;
 
@@ -41,7 +41,7 @@ public class AuthenticationConfig {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilterBefore(new JwtFilter(userService, secretKey), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtFilter(userServiceImpl, secretKey), UsernamePasswordAuthenticationFilter.class)
                 .build();
 
     }
