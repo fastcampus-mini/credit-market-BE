@@ -59,6 +59,14 @@
                      📄 CrawlingRepositoryOption.java
                      📄 CrawlingService.java      // SendRequest, ParseJson, Save - 포스트요청, json파싱, db저장
                📂 repository/
+                  📄 CartRepository.java
+                  📄 FavoriteRepository.java
+                  📄 FProductRepository.java
+                  📄 OptionRepository.java
+                  📄 OrderRepository.java
+                  📄 ProductRepository.java
+                  📄 TokenRepository.java
+                  📄 UserRepository.java
                📂 service/
                📂 utils/
                   📄 JwtUtil.java                 // Methods for jwt - 토큰 생성, 유효기간 확인, 유저 이메일 추출
