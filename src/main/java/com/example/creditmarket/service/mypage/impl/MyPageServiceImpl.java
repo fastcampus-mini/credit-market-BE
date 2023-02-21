@@ -57,7 +57,7 @@ public class MyPageServiceImpl implements MyPageService {
         List<EntityOrder> orders = orderRepository.findByUser(user, pageRequest);
 
         return orders.stream()
-                .map(this::checkedFavorite)
+                .map(OrderResponseDTO::new)
                 .collect(Collectors.toList());
     }
 
@@ -74,14 +74,5 @@ public class MyPageServiceImpl implements MyPageService {
         orderRepository.save(order);
 
         return "success";
-    }
-
-    //구매 상품목록에 관심 상품표시를 체크하는 메서드
-    private OrderResponseDTO checkedFavorite(EntityOrder order) {
-        OrderResponseDTO responseDTO = new OrderResponseDTO(order);
-        if (favoriteRepository.existsByUserAndFproduct(order.getUser(), order.getFproduct())) {
-            responseDTO.setFavorite(1);
-        }
-        return responseDTO;
     }
 }

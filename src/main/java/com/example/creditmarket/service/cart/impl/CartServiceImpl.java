@@ -87,7 +87,7 @@ public class CartServiceImpl implements CartService {
     private CartResponseDTO checkedFavorite(EntityCart cart) {
         CartResponseDTO responseDTO = new CartResponseDTO(cart);
         if (favoriteRepository.existsByUserAndFproduct(cart.getUser(), cart.getFproduct())) {
-            responseDTO.setFavorite(1);
+            responseDTO.setFavorite(true);
         }
         return responseDTO;
     }
