@@ -20,7 +20,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class AuthenticationConfig {
 
     private final UserService userService;
-
     @Value("${jwt.token.secret}")
     private String secretKey;
 
