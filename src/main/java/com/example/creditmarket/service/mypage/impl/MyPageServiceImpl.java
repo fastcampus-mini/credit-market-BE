@@ -84,11 +84,4 @@ public class MyPageServiceImpl implements MyPageService {
         }
         return responseDTO;
     }
-
-    //토큰에서 이메일을 꺼내고 회원인지 확인
-    private EntityUser getUser(Authentication authentication) {
-        String userEmail = authentication.getName();
-        return userRepository.findById(userEmail)
-                .orElseThrow(() -> new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
-    }
 }
