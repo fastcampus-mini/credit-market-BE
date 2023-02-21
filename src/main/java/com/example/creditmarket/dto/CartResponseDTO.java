@@ -16,9 +16,9 @@ public class CartResponseDTO {
 
     private String fproductCreditProductTypeName;
 
-    private int favorite; //int 1:0, boolean true:false 고민중
+    private boolean favorite;
 
-    public void setFavorite(int favorite) {
+    public void setFavorite(boolean favorite) {
         this.favorite = favorite;
     }
 
