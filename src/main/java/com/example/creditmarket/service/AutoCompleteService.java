@@ -8,8 +8,4 @@ import java.util.List;
 public interface AutoCompleteService {
 
     public List<String> getAutoComplete(String prefix);
-
-    public void addKeywords();
-
-
 }

@@ -27,7 +27,7 @@ public class EntityOrder {
     private Long orderId;
 
     @Column(name = "order_status")
-    private int orderStatus;
+    private Integer orderStatus;
 
     @Column(name = "order_date")
     private LocalDateTime orderDate;
