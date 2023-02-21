@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface MyPageService {
 
-    List<FavoriteResponseDTO> selectFavoriteList(int page, Authentication authentication);
+    List<FavoriteResponseDTO> selectFavoriteList(int page, String userEmail);
 
-    List<OrderResponseDTO> selectOrderList(int page, Authentication authentication);
+    List<OrderResponseDTO> selectOrderList(int page, String userEmail);
 
-    String updateOrder(Long orderId, Authentication authentication);
+    String updateOrder(Long orderId, String userEmail);
 
 }

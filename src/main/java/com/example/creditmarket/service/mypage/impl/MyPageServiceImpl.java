@@ -29,8 +29,9 @@ public class MyPageServiceImpl implements MyPageService {
     private final UserRepository userRepository;
     private final FavoriteRepository favoriteRepository;
 
-    public List<FavoriteResponseDTO> selectFavoriteList(int page, Authentication authentication) {
-        EntityUser user = getUser(authentication);
+    public List<FavoriteResponseDTO> selectFavoriteList(int page, String userEmail) {
+        EntityUser user = userRepository.findById(userEmail)
+                .orElseThrow(() -> new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
 
         if (page < 1) {
             throw new AppException(ErrorCode.PAGE_INDEX_ZERO, "Page가 1보다 작습니다.");
@@ -44,10 +45,11 @@ public class MyPageServiceImpl implements MyPageService {
                 .collect(Collectors.toList());
     }
 
-    public List<OrderResponseDTO> selectOrderList(int page, Authentication authentication) {
-        EntityUser user = getUser(authentication);
+    public List<OrderResponseDTO> selectOrderList(int page, String userEmail) {
+        EntityUser user = userRepository.findById(userEmail)
+                .orElseThrow(() -> new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
 
-        if (page < 1) { //예외 정하기
+        if (page < 1) {
             throw new AppException(ErrorCode.PAGE_INDEX_ZERO, "Page가 1보다 작습니다.");
         }
         PageRequest pageRequest = PageRequest.of(page - 1, 10, Sort.by("orderId").descending());
@@ -59,13 +61,13 @@ public class MyPageServiceImpl implements MyPageService {
                 .collect(Collectors.toList());
     }
 
-    //상품 취소
     @Override
-    public String updateOrder(Long orderId, Authentication authentication) {
-        EntityUser user = getUser(authentication);
+    public String updateOrder(Long orderId, String userEmail) {
+        EntityUser user = userRepository.findById(userEmail)
+                .orElseThrow(() -> new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
 
         EntityOrder order = orderRepository.findByUserAndOrderId(user, orderId)
-                .orElseThrow(() -> new AppException(ErrorCode.ORDER_NOT_FOUND, orderId+"존재하지 않는 구매 상품입니다."));
+                .orElseThrow(() -> new AppException(ErrorCode.ORDER_NOT_FOUND, orderId + " 존재하지 않는 구매 상품입니다."));
 
         order.setOrderStatus(0);
 

@@ -16,8 +16,6 @@ import com.example.creditmarket.service.cart.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,12 +33,13 @@ public class CartServiceImpl implements CartService {
     private final FavoriteRepository favoriteRepository;
 
     @Override
-    public String saveCart(CartSaveRequestDTO cartRequestDTO, Authentication authentication) {
-        EntityUser user = getUser(authentication);
+    public String saveCart(CartSaveRequestDTO cartRequestDTO, String userEmail) {
+        EntityUser user = userRepository.findById(userEmail)
+                .orElseThrow(() -> new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
 
         String fproductId = cartRequestDTO.getFproductId();
         EntityFProduct fProduct = fProductRespository.findById(fproductId)
-                .orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND, fproductId + "존재하지 않는 상품입니다."));
+                .orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND, fproductId + " 존재하지 않는 상품입니다."));
 
         EntityCart cart = EntityCart.builder()
                 .user(user)
@@ -53,8 +52,9 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<CartResponseDTO> selectCartList(int page, Authentication authentication) {
-        EntityUser user = getUser(authentication);
+    public List<CartResponseDTO> selectCartList(int page, String userEmail) {
+        EntityUser user = userRepository.findById(userEmail)
+                .orElseThrow(() -> new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
 
         if (page < 1) {
             throw new AppException(ErrorCode.PAGE_INDEX_ZERO, "Page가 1보다 작습니다.");
@@ -69,13 +69,14 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public String deleteCart(CartDeleteRequestDTO cartDeleteRequestDTO, Authentication authentication) {
-        EntityUser user = getUser(authentication);
+    public String deleteCart(CartDeleteRequestDTO cartDeleteRequestDTO, String userEmail) {
+        EntityUser user = userRepository.findById(userEmail)
+                .orElseThrow(() -> new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
 
         List<EntityCart> cartList = cartDeleteRequestDTO.toEntity();
 
         cartList.forEach(cart -> cartRepository.findByUserAndCartId(user, cart.getCartId())
-                .orElseThrow(() -> new AppException(ErrorCode.CART_NOT_FOUND, cart.getCartId() + "존재하지 않는 장바구니 상품입니다.")));
+                .orElseThrow(() -> new AppException(ErrorCode.CART_NOT_FOUND, cart.getCartId() + " 존재하지 않는 장바구니 상품입니다.")));
 
         cartRepository.deleteAll(cartList);
 

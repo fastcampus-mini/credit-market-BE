@@ -20,21 +20,21 @@ public class CartController {
 
     @PostMapping
     public ResponseEntity<String> saveCart(@RequestBody CartSaveRequestDTO cartRequestDTO, Authentication authentication) {
-        String result = cartService.saveCart(cartRequestDTO, authentication);
+        String result = cartService.saveCart(cartRequestDTO, authentication.getName());
 
         return ResponseEntity.ok().body(result);
     }
 
     @GetMapping("/{page}")
     public ResponseEntity<List<CartResponseDTO>> selectCartList(@PathVariable int page, Authentication authentication) {
-        List<CartResponseDTO> cartList = cartService.selectCartList(page, authentication);
+        List<CartResponseDTO> cartList = cartService.selectCartList(page, authentication.getName());
 
         return ResponseEntity.ok().body(cartList);
     }
 
     @DeleteMapping
     public ResponseEntity<String> deleteCart(@RequestBody CartDeleteRequestDTO cartDeleteRequestDTO, Authentication authentication) {
-        String result = cartService.deleteCart(cartDeleteRequestDTO, authentication);
+        String result = cartService.deleteCart(cartDeleteRequestDTO, authentication.getName());
 
         return ResponseEntity.ok().body(result);
     }
