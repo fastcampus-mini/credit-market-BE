@@ -29,22 +29,22 @@ public class AutoCompleteServiceImpl implements AutoCompleteService {
     }
 
     public void addKeywords() {
-        List<String> companyNames = fProductRespository.findAll().stream().map(EntityFProduct::getFproduct_company_name).collect(Collectors.toList());
-        for (String companyName : companyNames) {
-            root.addWord(companyName);
-        }
-        List<String> fproductNames = fProductRespository.findAll().stream().map(EntityFProduct::getFproduct_name).collect(Collectors.toList());
-        for (String fproductName : fproductNames) {
-            root.addWord(fproductName);
-        }
-        List<String> fproductCreditProductTypeNames = fProductRespository.findAll().stream().map(EntityFProduct::getFproduct_credit_product_type_name).collect(Collectors.toList());
-        for (String fproductCreditProductTypeName : fproductCreditProductTypeNames) {
-            root.addWord(fproductCreditProductTypeName);
-        }
-        List<String> optionsInterestTypes = optionRepository.findAll().stream().map(EntityOption::getOptions_interest_type).collect(Collectors.toList());
-        for (String optionsInterestType : optionsInterestTypes) {
-            root.addWord(optionsInterestType);
-        }
+//        List<String> companyNames = fProductRespository.findAll().stream().map(EntityFProduct::getFproduct_company_name).collect(Collectors.toList());
+//        for (String companyName : companyNames) {
+//            root.addWord(companyName);
+//        }
+//        List<String> fproductNames = fProductRespository.findAll().stream().map(EntityFProduct::getFproduct_name).collect(Collectors.toList());
+//        for (String fproductName : fproductNames) {
+//            root.addWord(fproductName);
+//        }
+//        List<String> fproductCreditProductTypeNames = fProductRespository.findAll().stream().map(EntityFProduct::getFproduct_credit_product_type_name).collect(Collectors.toList());
+//        for (String fproductCreditProductTypeName : fproductCreditProductTypeNames) {
+//            root.addWord(fproductCreditProductTypeName);
+//        }
+//        List<String> optionsInterestTypes = optionRepository.findAll().stream().map(EntityOption::getOptions_interest_type).collect(Collectors.toList());
+//        for (String optionsInterestType : optionsInterestTypes) {
+//            root.addWord(optionsInterestType);
+//        }
     }
 }
 
