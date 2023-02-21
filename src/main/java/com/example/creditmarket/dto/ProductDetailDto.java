@@ -14,39 +14,39 @@ import lombok.NoArgsConstructor;
 public class ProductDetailDto {
     //상품명, 개요, 대상, 한도, 금리 등의 상세정보 출력
 
-    private String fproduct_id;
-    private String fproduct_disclosure_month;
-    private String fproduct_company_id;
-    private String fproduct_company_name;
-    private String fproduct_code;
-    private String fproduct_name;
-    private int fproduct_credit_product_type_code;
-    private String fproduct_credit_product_type_name;
-    private String fproduct_join_method;
-    private String fproduct_credit_bureau_name ;
-    private String fproduct_disclosure_start_month;
-    private String fproduct_submit_day;
-    private int fproduct_minimum_age;
-    private String fproduct_target_gender;
-    private String options_interest_type; //금리 구분
-    private Double options_crdt_grad_avg; // 평균 금리
+    private String productId;
+    private String productDisclosureMonth;
+    private String productCompanyId;
+    private String productCompanyName;
+    private String productCode;
+    private String productName;
+    private int productCreditProductTypeCode;
+    private String productCreditProductTypeName;
+    private String productJoinMethod;
+    private String productCreditBureauName ;
+    private String productDisclosureStartMonth;
+    private String productSubmitDay;
+    private int productMinimumAge;
+    private String productTargetGender;
+    private String optionsInterestType; //금리 구분
+    private Double optionsCrdtGradAvg; // 평균 금리
 
     public ProductDetailDto (EntityFProduct entity, EntityOption option){
-        this.fproduct_id = entity.getFproduct_id();
-        this.fproduct_code = entity.getFproduct_code();
-        this.fproduct_company_id = entity.getFproduct_company_id();
-        this.fproduct_credit_bureau_name = entity.getFproduct_credit_bureau_name();
-        this.fproduct_credit_product_type_code = entity.getFproduct_credit_product_type_code();
-        this.fproduct_credit_product_type_name = entity.getFproduct_credit_product_type_name();
-        this.fproduct_disclosure_month = entity.getFproduct_disclosure_month();
-        this.fproduct_disclosure_start_month = entity.getFproduct_disclosure_start_month();
-        this.fproduct_join_method = entity.getFproduct_join_method();
-        this.fproduct_minimum_age= entity.getFproduct_minimum_age();
-        this.fproduct_name = entity.getFproduct_name();
-        this.fproduct_submit_day = entity.getFproduct_submit_day();
-        this.fproduct_target_gender = entity.getFproduct_target_gender();
-        this.options_crdt_grad_avg = option.getOptions_crdt_grad_avg();
-        this.options_interest_type = option.getOptions_interest_type();
-        this.fproduct_company_name = entity.getFproduct_company_name();
+        this.productId = entity.getFproduct_id();
+        this.productCode = entity.getFproduct_code();
+        this.productCompanyId = entity.getFproduct_company_id();
+        this.productCreditBureauName = entity.getFproduct_credit_bureau_name();
+        this.productCreditProductTypeCode = entity.getFproduct_credit_product_type_code();
+        this.productCreditProductTypeName = entity.getFproduct_credit_product_type_name();
+        this.productDisclosureMonth = entity.getFproduct_disclosure_month();
+        this.productDisclosureStartMonth = entity.getFproduct_disclosure_start_month();
+        this.productJoinMethod = entity.getFproduct_join_method();
+        this.productMinimumAge= entity.getFproduct_minimum_age();
+        this.productName = entity.getFproduct_name();
+        this.productSubmitDay = entity.getFproduct_submit_day();
+        this.productTargetGender = entity.getFproduct_target_gender();
+        this.productName = entity.getFproduct_company_name();
+        this.optionsCrdtGradAvg = option.getOptions_crdt_grad_avg();
+        this.optionsInterestType = option.getOptions_interest_type();
     }
 }

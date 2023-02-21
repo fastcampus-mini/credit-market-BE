@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
      * 상품 상세정보 출력(상품명, 개요, 대상, 한도, 금리 등의 상세정보 출력)
      */
     public ProductDetailDto getProductDetail(String id) {
-        EntityFProduct product = productRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 아이디를 못찾음"));
+        EntityFProduct product = productRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 아이디를 찾을수 없습니다"));
         EntityOption option = optionRepository.findByProductId(id);
         return new ProductDetailDto(product, option);
     }
@@ -65,7 +65,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * 찜 추가
+     * 찜 추가 & 취소
      */
     public String favoriteService(String productId, String userEmail) {
         EntityFProduct product = productRepository.findById(productId).orElseThrow(() ->
