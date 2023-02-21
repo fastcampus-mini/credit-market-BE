@@ -1,4 +1,4 @@
-package com.example.creditmarket.dto;
+package com.example.creditmarket.dto.response;
 
 import com.example.creditmarket.entity.EntityFProduct;
 import com.example.creditmarket.entity.EntityOption;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Data
-public class RecommendResponseDto {
+public class RecommendResponseDTO {
 
     private String productId;
 
@@ -25,7 +25,7 @@ public class RecommendResponseDto {
 
     private double avgInterest;
 
-    public RecommendResponseDto(EntityFProduct product, EntityOption option){
+    public RecommendResponseDTO(EntityFProduct product, EntityOption option){
         this.productId = product.getFproduct_id();
         this.companyName = product.getFproduct_company_name();
         this.productName = product.getFproduct_name();

@@ -1,6 +1,6 @@
 package com.example.creditmarket.service;
 
-import com.example.creditmarket.dto.MainListResponseDto;
+import com.example.creditmarket.dto.response.MainListResponseDTO;
 import com.example.creditmarket.entity.EntityOption;
 import com.example.creditmarket.entity.EntityUser;
 import com.example.creditmarket.repository.OptionRepository;
@@ -30,7 +30,7 @@ public class SearchService {
      * @param rate : 평균금리
      * @return
      */
-    public List<MainListResponseDto> searchResult(String keyword, String loan, String age,
+    public List<MainListResponseDTO> searchResult(String keyword, String loan, String age,
                                                   String gender, String interest, Double rate,
                                                   String userId, int page) {
         Pageable pageable = PageRequest.of(page, 10);
@@ -45,12 +45,12 @@ public class SearchService {
         }
         List<Object[]> lists = result.getContent();
         if (lists != null || lists.size() != 0) {
-            List<MainListResponseDto> mainListResponseListDto = new ArrayList<>();
+            List<MainListResponseDTO> mainListResponseListDto = new ArrayList<>();
             for (int i = 0; i < lists.size(); i++) {
                 EntityOption resEntityOption = (EntityOption)lists.get(i)[0];
                 // 해당 유저의 관심상품이 있는 경우
                 if(lists.get(i)[1] != null) {
-                mainListResponseListDto.add(i, new MainListResponseDto(resEntityOption.getEntityFProduct().getFproduct_company_name(),
+                mainListResponseListDto.add(i, new MainListResponseDTO(resEntityOption.getEntityFProduct().getFproduct_company_name(),
                         resEntityOption.getEntityFProduct().getFproduct_name(),
                         resEntityOption.getEntityFProduct().getFproduct_credit_product_type_name(),
                         resEntityOption.getOptions_crdt_grad_avg(),
@@ -58,7 +58,7 @@ public class SearchService {
                         true
                 ));
                 } else {
-                    mainListResponseListDto.add(i, new MainListResponseDto(resEntityOption.getEntityFProduct().getFproduct_company_name(),
+                    mainListResponseListDto.add(i, new MainListResponseDTO(resEntityOption.getEntityFProduct().getFproduct_company_name(),
                             resEntityOption.getEntityFProduct().getFproduct_name(),
                             resEntityOption.getEntityFProduct().getFproduct_credit_product_type_name(),
                             resEntityOption.getOptions_crdt_grad_avg(),

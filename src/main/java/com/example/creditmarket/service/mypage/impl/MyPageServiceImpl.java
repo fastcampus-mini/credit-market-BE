@@ -1,7 +1,7 @@
 package com.example.creditmarket.service.mypage.impl;
 
-import com.example.creditmarket.dto.FavoriteResponseDTO;
-import com.example.creditmarket.dto.OrderResponseDTO;
+import com.example.creditmarket.dto.response.FavoriteResponseDTO;
+import com.example.creditmarket.dto.response.OrderResponseDTO;
 import com.example.creditmarket.entity.EntityFavorite;
 import com.example.creditmarket.entity.EntityOrder;
 import com.example.creditmarket.entity.EntityUser;

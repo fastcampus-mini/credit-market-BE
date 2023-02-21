@@ -1,8 +1,7 @@
 package com.example.creditmarket.service.mypage;
 
-import com.example.creditmarket.dto.FavoriteResponseDTO;
-import com.example.creditmarket.dto.OrderResponseDTO;
-import org.springframework.security.core.Authentication;
+import com.example.creditmarket.dto.response.FavoriteResponseDTO;
+import com.example.creditmarket.dto.response.OrderResponseDTO;
 
 import java.util.List;
 

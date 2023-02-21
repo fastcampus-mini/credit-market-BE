@@ -1,6 +1,6 @@
 package com.example.creditmarket.service;
 
-import com.example.creditmarket.dto.UserSignUpRequestDTO;
+import com.example.creditmarket.dto.response.UserSignUpRequestDTO;
 import com.example.creditmarket.entity.EntityToken;
 import com.example.creditmarket.entity.EntityUser;
 import com.example.creditmarket.exception.AppException;

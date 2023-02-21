@@ -1,8 +1,7 @@
 package com.example.creditmarket.controller;
 
-import com.example.creditmarket.dto.UserInfoResponseDTO;
-import com.example.creditmarket.dto.UserLoginRequestDTO;
-import com.example.creditmarket.dto.UserSignUpRequestDTO;
+import com.example.creditmarket.dto.request.UserLoginRequestDTO;
+import com.example.creditmarket.dto.response.UserSignUpRequestDTO;
 import com.example.creditmarket.entity.EntityUser;
 import com.example.creditmarket.service.UserService;
 import lombok.RequiredArgsConstructor;

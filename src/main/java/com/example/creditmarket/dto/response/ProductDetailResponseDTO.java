@@ -1,4 +1,4 @@
-package com.example.creditmarket.dto;
+package com.example.creditmarket.dto.response;
 
 import com.example.creditmarket.entity.EntityFProduct;
 import com.example.creditmarket.entity.EntityOption;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Data
-public class ProductDetailDto {
+public class ProductDetailResponseDTO {
     //상품명, 개요, 대상, 한도, 금리 등의 상세정보 출력
 
     private String productId;
@@ -31,7 +31,7 @@ public class ProductDetailDto {
     private String optionsInterestType; //금리 구분
     private Double optionsCrdtGradAvg; // 평균 금리
 
-    public ProductDetailDto (EntityFProduct entity, EntityOption option){
+    public ProductDetailResponseDTO(EntityFProduct entity, EntityOption option){
         this.productId = entity.getFproduct_id();
         this.productCode = entity.getFproduct_code();
         this.productCompanyId = entity.getFproduct_company_id();
