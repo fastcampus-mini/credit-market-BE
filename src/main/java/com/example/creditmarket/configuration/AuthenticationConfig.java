@@ -25,7 +25,6 @@ import java.util.List;
 public class AuthenticationConfig {
 
     private final UserService userService;
-
     @Value("${jwt.token.secret}")
     private String secretKey;
 

@@ -25,7 +25,6 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final TokenRepository tokenRepository;
-
     private final BCryptPasswordEncoder encoder;
 
     @Value("${jwt.token.secret}")
