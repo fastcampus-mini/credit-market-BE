@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface CartService {
 
-    String saveCart(CartSaveRequestDTO cartRequestDTO, Authentication authentication);
+    String saveCart(CartSaveRequestDTO cartRequestDTO, String userEmail);
 
-    List<CartResponseDTO> selectCartList(int page, Authentication authentication);
+    List<CartResponseDTO> selectCartList(int page, String userEmail);
 
-    String deleteCart(CartDeleteRequestDTO cartDeleteRequestDTO, Authentication authentication);
+    String deleteCart(CartDeleteRequestDTO cartDeleteRequestDTO, String userEmail);
 }
