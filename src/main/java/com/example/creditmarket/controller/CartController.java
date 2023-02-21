@@ -3,7 +3,7 @@ package com.example.creditmarket.controller;
 import com.example.creditmarket.dto.request.CartDeleteRequestDTO;
 import com.example.creditmarket.dto.response.CartResponseDTO;
 import com.example.creditmarket.dto.request.CartSaveRequestDTO;
-import com.example.creditmarket.service.cart.CartService;
+import com.example.creditmarket.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;

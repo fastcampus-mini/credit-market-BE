@@ -2,7 +2,7 @@ package com.example.creditmarket.controller;
 
 import com.example.creditmarket.dto.response.ProductDetailResponseDTO;
 import com.example.creditmarket.dto.response.RecommendResponseDTO;
-import com.example.creditmarket.service.product.ProductService;
+import com.example.creditmarket.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;

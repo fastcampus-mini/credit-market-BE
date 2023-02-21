@@ -3,7 +3,7 @@ package com.example.creditmarket.controller;
 import com.example.creditmarket.dto.request.UserLoginRequestDTO;
 import com.example.creditmarket.dto.response.UserSignUpRequestDTO;
 import com.example.creditmarket.entity.EntityUser;
-import com.example.creditmarket.service.UserService;
+import com.example.creditmarket.service.Impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userservice;
+    private final UserServiceImpl userservice;
 
     @PostMapping("/usersignup")
     public ResponseEntity<String> signup(@RequestBody UserSignUpRequestDTO request) {

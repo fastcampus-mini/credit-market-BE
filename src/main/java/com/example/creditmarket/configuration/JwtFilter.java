@@ -1,6 +1,6 @@
 package com.example.creditmarket.configuration;
 
-import com.example.creditmarket.service.UserService;
+import com.example.creditmarket.service.Impl.UserServiceImpl;
 import com.example.creditmarket.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import java.util.List;
 @Slf4j
 public class JwtFilter extends OncePerRequestFilter {
 
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
     private final String secretKey;
 
     @Override
@@ -47,7 +47,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String token = authorization.split(" ")[1].trim();
 
         // log out 여부 확인
-        if (!userService.isValid(token)) {
+        if (!userServiceImpl.isValid(token)) {
             log.error("Logged out user");
             filterChain.doFilter(request, response);
             return;

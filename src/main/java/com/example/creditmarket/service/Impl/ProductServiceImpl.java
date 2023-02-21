@@ -1,4 +1,4 @@
-package com.example.creditmarket.service.product.impl;
+package com.example.creditmarket.service.Impl;
 
 import com.example.creditmarket.dto.request.FavoriteRequestDto;
 import com.example.creditmarket.dto.request.OrderRequestDTO;
@@ -9,7 +9,7 @@ import com.example.creditmarket.entity.EntityFavorite;
 import com.example.creditmarket.entity.EntityOption;
 import com.example.creditmarket.entity.EntityUser;
 import com.example.creditmarket.repository.*;
-import com.example.creditmarket.service.product.ProductService;
+import com.example.creditmarket.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

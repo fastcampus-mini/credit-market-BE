@@ -1,4 +1,4 @@
-package com.example.creditmarket.service.cart.impl;
+package com.example.creditmarket.service.Impl;
 
 import com.example.creditmarket.dto.request.CartDeleteRequestDTO;
 import com.example.creditmarket.dto.response.CartResponseDTO;
@@ -12,7 +12,7 @@ import com.example.creditmarket.repository.CartRepository;
 import com.example.creditmarket.repository.FProductRespository;
 import com.example.creditmarket.repository.FavoriteRepository;
 import com.example.creditmarket.repository.UserRepository;
-import com.example.creditmarket.service.cart.CartService;
+import com.example.creditmarket.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

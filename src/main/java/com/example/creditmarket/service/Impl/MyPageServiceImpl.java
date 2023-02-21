@@ -1,4 +1,4 @@
-package com.example.creditmarket.service.mypage.impl;
+package com.example.creditmarket.service.Impl;
 
 import com.example.creditmarket.dto.response.FavoriteResponseDTO;
 import com.example.creditmarket.dto.response.OrderResponseDTO;
@@ -10,7 +10,7 @@ import com.example.creditmarket.exception.ErrorCode;
 import com.example.creditmarket.repository.FavoriteRepository;
 import com.example.creditmarket.repository.OrderRepository;
 import com.example.creditmarket.repository.UserRepository;
-import com.example.creditmarket.service.mypage.MyPageService;
+import com.example.creditmarket.service.MyPageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

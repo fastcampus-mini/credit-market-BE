@@ -1,7 +1,7 @@
 package com.example.creditmarket.controller;
 
 import com.example.creditmarket.dto.response.MainListResponseDTO;
-import com.example.creditmarket.service.SearchService;
+import com.example.creditmarket.service.Impl.SearchServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.Nullable;
 import io.swagger.annotations.Api;
@@ -16,7 +16,7 @@ import java.util.List;
 @Api(tags = {"검색 서비스"}, description = "키워드와 카테고리 검색을 담당합니다.")
 public class SearchController {
 
-    private final SearchService searchService;
+    private final SearchServiceImpl searchServiceImpl;
 
     @GetMapping("/search/results")
     public List<MainListResponseDTO> searchKeyword(@RequestParam(required = false, defaultValue = "") @Nullable String keyword,
@@ -30,9 +30,9 @@ public class SearchController {
                                                 ) {
         String userEmail = "";
         if(authentication == null){
-            return searchService.searchResult(keyword.trim(), loan.trim(), age.trim(), gender.trim(), interest.trim(), rate, userEmail, (page-1));
+            return searchServiceImpl.searchResult(keyword.trim(), loan.trim(), age.trim(), gender.trim(), interest.trim(), rate, userEmail, (page-1));
         }
         userEmail = authentication.getPrincipal().toString();
-        return searchService.searchResult(keyword.trim(), loan.trim(), age.trim(), gender.trim(), interest.trim(), rate, userEmail, (page-1));
+        return searchServiceImpl.searchResult(keyword.trim(), loan.trim(), age.trim(), gender.trim(), interest.trim(), rate, userEmail, (page-1));
     }
 }

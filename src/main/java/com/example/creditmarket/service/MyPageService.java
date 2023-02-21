@@ -1,4 +1,4 @@
-package com.example.creditmarket.service.mypage;
+package com.example.creditmarket.service;
 
 import com.example.creditmarket.dto.response.FavoriteResponseDTO;
 import com.example.creditmarket.dto.response.OrderResponseDTO;

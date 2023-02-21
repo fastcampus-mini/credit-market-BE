@@ -1,4 +1,4 @@
-package com.example.creditmarket.service.product;
+package com.example.creditmarket.service;
 
 import com.example.creditmarket.dto.response.ProductDetailResponseDTO;
 import com.example.creditmarket.dto.response.RecommendResponseDTO;

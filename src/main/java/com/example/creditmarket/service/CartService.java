@@ -1,4 +1,4 @@
-package com.example.creditmarket.service.cart;
+package com.example.creditmarket.service;
 
 import com.example.creditmarket.dto.request.CartDeleteRequestDTO;
 import com.example.creditmarket.dto.request.CartSaveRequestDTO;
