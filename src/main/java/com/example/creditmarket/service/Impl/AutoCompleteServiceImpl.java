@@ -6,45 +6,60 @@ import com.example.creditmarket.repository.FProductRespository;
 import com.example.creditmarket.repository.OptionRepository;
 import com.example.creditmarket.service.AutoCompleteService;
 import com.example.creditmarket.utils.AutoCompleteUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class AutoCompleteServiceImpl implements AutoCompleteService {
 
     private final FProductRespository fProductRespository;
     private final OptionRepository optionRepository;
     private final AutoCompleteUtil root = new AutoCompleteUtil();
 
-    public AutoCompleteServiceImpl(FProductRespository fProductRespository, OptionRepository optionRepository) {
-        this.fProductRespository = fProductRespository;
-        this.optionRepository = optionRepository;
-        addKeywords();
-    }
 
     public List<String> getAutoComplete(String prefix) {
         return root.getWordsWithPrefix(prefix);
     }
 
+    @PostConstruct
     public void addKeywords() {
-//        List<String> companyNames = fProductRespository.findAll().stream().map(EntityFProduct::getFproduct_company_name).collect(Collectors.toList());
-//        for (String companyName : companyNames) {
-//            root.addWord(companyName);
-//        }
-//        List<String> fproductNames = fProductRespository.findAll().stream().map(EntityFProduct::getFproduct_name).collect(Collectors.toList());
-//        for (String fproductName : fproductNames) {
-//            root.addWord(fproductName);
-//        }
-//        List<String> fproductCreditProductTypeNames = fProductRespository.findAll().stream().map(EntityFProduct::getFproduct_credit_product_type_name).collect(Collectors.toList());
-//        for (String fproductCreditProductTypeName : fproductCreditProductTypeNames) {
-//            root.addWord(fproductCreditProductTypeName);
-//        }
-//        List<String> optionsInterestTypes = optionRepository.findAll().stream().map(EntityOption::getOptions_interest_type).collect(Collectors.toList());
-//        for (String optionsInterestType : optionsInterestTypes) {
-//            root.addWord(optionsInterestType);
-//        }
+        List<String> companyNames = fProductRespository.findAll().stream()
+                .map(EntityFProduct::getFproduct_company_name)
+                .filter(Objects::nonNull)
+                .distinct()
+                .collect(Collectors.toList());
+        for (String companyName : companyNames) {
+            root.addWord(companyName);
+        }
+        List<String> fproductNames = fProductRespository.findAll().stream()
+                .map(EntityFProduct::getFproduct_name)
+                .filter(Objects::nonNull) // filter out null values
+                .distinct() // remove duplicates
+                .collect(Collectors.toList());
+        for (String fproductName : fproductNames) {
+            root.addWord(fproductName);
+        }
+        List<String> fproductCreditProductTypeNames = fProductRespository.findAll().stream()
+                .map(EntityFProduct::getFproduct_credit_product_type_name)
+                .filter(Objects::nonNull) // filter out null values
+                .distinct() // remove duplicates
+                .collect(Collectors.toList());
+        for (String fproductCreditProductTypeName : fproductCreditProductTypeNames) {
+            root.addWord(fproductCreditProductTypeName);
+        }
+        List<String> optionsInterestTypes = optionRepository.findAll().stream()
+                .map(EntityOption::getOptions_interest_type)
+                .filter(Objects::nonNull) // filter out null values
+                .distinct() // remove duplicates
+                .collect(Collectors.toList());
+        for (String optionsInterestType : optionsInterestTypes) {
+            root.addWord(optionsInterestType);
+        }
     }
 }
 

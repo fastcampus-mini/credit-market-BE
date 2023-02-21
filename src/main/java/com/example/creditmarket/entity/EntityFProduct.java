@@ -33,7 +33,7 @@ public class EntityFProduct {
     @Column(name = "fproduct_name")
     private String fproduct_name;
     @Column(name = "fproduct_credit_product_type_code")
-    private int fproduct_credit_product_type_code;
+    private Integer fproduct_credit_product_type_code;
     @Column(name = "fproduct_credit_product_type_name")
     private String fproduct_credit_product_type_name;
     @Column(name = "fproduct_join_method")
@@ -45,7 +45,7 @@ public class EntityFProduct {
     @Column(name = "fproduct_submit_day")
     private String fproduct_submit_day;
     @Column(name = "fproduct_minimum_age")
-    private int fproduct_minimum_age;
+    private Integer fproduct_minimum_age;
     @Column(name = "fproduct_target_gender")
     private String fproduct_target_gender;
 }
