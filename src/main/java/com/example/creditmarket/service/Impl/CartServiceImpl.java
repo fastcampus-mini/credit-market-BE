@@ -14,8 +14,6 @@ import com.example.creditmarket.repository.FavoriteRepository;
 import com.example.creditmarket.repository.UserRepository;
 import com.example.creditmarket.service.CartService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,12 +54,7 @@ public class CartServiceImpl implements CartService {
         EntityUser user = userRepository.findById(userEmail)
                 .orElseThrow(() -> new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
 
-        if (page < 1) {
-            throw new AppException(ErrorCode.PAGE_INDEX_ZERO, "Page가 1보다 작습니다.");
-        }
-        PageRequest pageRequest = PageRequest.of(page - 1, 10, Sort.by("cartId").descending());
-
-        List<EntityCart> cartList = cartRepository.findByUser(user, pageRequest);
+        List<EntityCart> cartList = cartRepository.findByUserOrderByCartIdDesc(user);
 
         return cartList.stream()
                 .map(this::checkedFavorite)
