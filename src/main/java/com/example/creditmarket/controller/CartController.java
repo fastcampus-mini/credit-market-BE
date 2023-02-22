@@ -1,8 +1,8 @@
 package com.example.creditmarket.controller;
 
 import com.example.creditmarket.dto.request.CartDeleteRequestDTO;
-import com.example.creditmarket.dto.response.CartResponseDTO;
 import com.example.creditmarket.dto.request.CartSaveRequestDTO;
+import com.example.creditmarket.dto.response.CartResponseDTO;
 import com.example.creditmarket.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +25,9 @@ public class CartController {
         return ResponseEntity.ok().body(result);
     }
 
-    @GetMapping("/{page}")
-    public ResponseEntity<List<CartResponseDTO>> selectCartList(@PathVariable int page, Authentication authentication) {
-        List<CartResponseDTO> cartList = cartService.selectCartList(page, authentication.getName());
+    @GetMapping
+    public ResponseEntity<List<CartResponseDTO>> selectCartList(Authentication authentication) {
+        List<CartResponseDTO> cartList = cartService.selectCartList(authentication.getName());
 
         return ResponseEntity.ok().body(cartList);
     }

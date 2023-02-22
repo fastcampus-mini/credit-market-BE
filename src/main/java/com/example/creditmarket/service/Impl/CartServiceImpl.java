@@ -1,8 +1,8 @@
 package com.example.creditmarket.service.Impl;
 
 import com.example.creditmarket.dto.request.CartDeleteRequestDTO;
-import com.example.creditmarket.dto.response.CartResponseDTO;
 import com.example.creditmarket.dto.request.CartSaveRequestDTO;
+import com.example.creditmarket.dto.response.CartResponseDTO;
 import com.example.creditmarket.entity.EntityCart;
 import com.example.creditmarket.entity.EntityFProduct;
 import com.example.creditmarket.entity.EntityUser;
@@ -50,7 +50,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<CartResponseDTO> selectCartList(int page, String userEmail) {
+    public List<CartResponseDTO> selectCartList(String userEmail) {
         EntityUser user = userRepository.findById(userEmail)
                 .orElseThrow(() -> new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
 

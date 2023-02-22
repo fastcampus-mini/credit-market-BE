@@ -10,7 +10,7 @@ public interface CartService {
 
     String saveCart(CartSaveRequestDTO cartRequestDTO, String userEmail);
 
-    List<CartResponseDTO> selectCartList(int page, String userEmail);
+    List<CartResponseDTO> selectCartList(String userEmail);
 
     String deleteCart(CartDeleteRequestDTO cartDeleteRequestDTO, String userEmail);
 }
