@@ -56,7 +56,8 @@ public class SearchServiceImpl implements SearchService {
                         resEntityOption.getEntityFProduct().getFproduct_credit_product_type_name(),
                         resEntityOption.getOptions_crdt_grad_avg(),
                         resEntityOption.getOptions_interest_type(),
-                        true
+                        true,
+                        resEntityOption.getEntityFProduct().getFproduct_id()
                 ));
                 } else {
                     mainListResponseListDto.add(i, new MainListResponseDTO(resEntityOption.getEntityFProduct().getFproduct_company_name(),
@@ -64,7 +65,8 @@ public class SearchServiceImpl implements SearchService {
                             resEntityOption.getEntityFProduct().getFproduct_credit_product_type_name(),
                             resEntityOption.getOptions_crdt_grad_avg(),
                             resEntityOption.getOptions_interest_type(),
-                            false
+                            false,
+                            resEntityOption.getEntityFProduct().getFproduct_id()
                     ));
                 }
             }

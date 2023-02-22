@@ -16,5 +16,6 @@ public class MainListResponseDTO {
     private Double interestRateAvg; // 평균 금리
     private String interestType;    // 금리 유형
     private boolean favorite;   // 관심상품 등록 여부
+    private String productId; // 상품 id
 
 }
