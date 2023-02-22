@@ -1,8 +1,8 @@
 package com.example.creditmarket.service.Impl;
 
 import com.example.creditmarket.dto.request.CartDeleteRequestDTO;
-import com.example.creditmarket.dto.response.CartResponseDTO;
 import com.example.creditmarket.dto.request.CartSaveRequestDTO;
+import com.example.creditmarket.dto.response.CartResponseDTO;
 import com.example.creditmarket.entity.EntityCart;
 import com.example.creditmarket.entity.EntityFProduct;
 import com.example.creditmarket.entity.EntityUser;
@@ -14,8 +14,6 @@ import com.example.creditmarket.repository.FavoriteRepository;
 import com.example.creditmarket.repository.UserRepository;
 import com.example.creditmarket.service.CartService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,16 +50,11 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<CartResponseDTO> selectCartList(int page, String userEmail) {
+    public List<CartResponseDTO> selectCartList(String userEmail) {
         EntityUser user = userRepository.findById(userEmail)
                 .orElseThrow(() -> new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
 
-        if (page < 1) {
-            throw new AppException(ErrorCode.PAGE_INDEX_ZERO, "Page가 1보다 작습니다.");
-        }
-        PageRequest pageRequest = PageRequest.of(page - 1, 10, Sort.by("cartId").descending());
-
-        List<EntityCart> cartList = cartRepository.findByUser(user, pageRequest);
+        List<EntityCart> cartList = cartRepository.findByUserOrderByCartIdDesc(user);
 
         return cartList.stream()
                 .map(this::checkedFavorite)
