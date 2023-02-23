@@ -82,7 +82,8 @@
 
 
 ## :floppy_disk: ER 다이어그램 (ER-Diagram with Cardinality Constraints)
-![image](https://user-images.githubusercontent.com/113500771/220207986-4ae94752-b934-46ef-b98a-f97a1b9a575b.png)
+![image](https://user-images.githubusercontent.com/113500771/220917663-143d1815-ffcc-4f44-981d-0a8a89e5cdd2.png)
+
 
 
 <br/><br/>
