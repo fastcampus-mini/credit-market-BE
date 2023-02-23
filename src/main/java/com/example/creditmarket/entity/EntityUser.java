@@ -35,6 +35,9 @@ public class EntityUser {
     @Column(name = "user_password")
     private String userPassword;
 
+    @Column(name = "user_name")
+    private String userName;
+
     @Column(name = "user_gender")
     private String userGender;
 

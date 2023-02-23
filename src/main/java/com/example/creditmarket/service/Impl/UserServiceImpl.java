@@ -1,6 +1,6 @@
 package com.example.creditmarket.service.Impl;
 
-import com.example.creditmarket.dto.response.UserSignUpRequestDTO;
+import com.example.creditmarket.dto.request.UserSignUpRequestDTO;
 import com.example.creditmarket.entity.EntityToken;
 import com.example.creditmarket.entity.EntityUser;
 import com.example.creditmarket.exception.AppException;
@@ -98,5 +98,15 @@ public class UserServiceImpl implements UserService {
     public String infoUpdate(EntityUser user){
         userRepository.save(user);
         return "success";
+    }
+
+    public EntityUser getUserInfo(HttpServletRequest request){
+        // userToken 없음
+        // Token 꺼내기
+        String token = request.getHeader(HttpHeaders.AUTHORIZATION).split(" ")[1].trim();
+        String userEmail = JwtUtil.getUserEmail(token, secretKey);
+        EntityUser selectedUser = userRepository.findByUserEmail(userEmail)
+                .orElseThrow(()->new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
+        return selectedUser;
     }
 }
