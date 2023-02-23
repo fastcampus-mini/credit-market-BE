@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    ProductDetailResponseDTO getProductDetail(String productId);
+    ProductDetailResponseDTO getProductDetail(String productId, String userEmail);
 
     String buyProduct(String productId,String userEmail);
 

@@ -20,19 +20,22 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductRepository productRepository;
+    private final FProductRespository productRepository;
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
     private final OptionRepository optionRepository;
     private final FavoriteRepository favoriteRepository;
 
     /**
-     * 상품 상세정보 출력(상품명, 개요, 대상, 한도, 금리 등의 상세정보 출력)
+     * 상품 상세정보 출력(상품명, 개요, 대상, 한도, 금리, 찜 여부 등의 상세정보 출력)
      */
-    public ProductDetailResponseDTO getProductDetail(String id) {
+    public ProductDetailResponseDTO getProductDetail(String id, String userEmail) {
+        EntityUser user = userRepository.findByUserEmail(userEmail).orElseThrow(
+                ()-> new IllegalArgumentException("해당 아이디를 찾을수 없습니다."));
         EntityFProduct product = productRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 아이디를 찾을수 없습니다"));
         EntityOption option = optionRepository.findByProductId(id);
-        return new ProductDetailResponseDTO(product, option);
+        boolean isFavorite = favoriteRepository.existsByUserAndFproduct(user, product);
+        return new ProductDetailResponseDTO(product, option, isFavorite);
     }
 
     /**
@@ -61,8 +64,8 @@ public class ProductServiceImpl implements ProductService {
         EntityUser user = userRepository.findById(userEmail).orElseThrow();
         List<EntityFProduct> products = productRepository.findProductsByUserPref(user.getUserPrefCreditProductTypeName());
         for (EntityFProduct pr : products) {
-            List<EntityOption> options = optionRepository.findOptionByProductIdAndType(pr.getFproduct_id(), user.getUserPrefInterestType());
-            for (EntityOption op : options) {
+            EntityOption op = optionRepository.findOptionByProductIdAndType(pr.getFproduct_id(), user.getUserPrefInterestType());
+            if (op != null) {
                 list.add(new RecommendResponseDTO(pr, op));}}
         return list;
     }
