@@ -2,12 +2,15 @@ package com.example.creditmarket.service.Impl;
 
 import com.example.creditmarket.dto.response.FavoriteResponseDTO;
 import com.example.creditmarket.dto.response.OrderResponseDTO;
+import com.example.creditmarket.dto.response.RecommendResponseDTO;
 import com.example.creditmarket.entity.EntityFavorite;
+import com.example.creditmarket.entity.EntityOption;
 import com.example.creditmarket.entity.EntityOrder;
 import com.example.creditmarket.entity.EntityUser;
 import com.example.creditmarket.exception.AppException;
 import com.example.creditmarket.exception.ErrorCode;
 import com.example.creditmarket.repository.FavoriteRepository;
+import com.example.creditmarket.repository.OptionRepository;
 import com.example.creditmarket.repository.OrderRepository;
 import com.example.creditmarket.repository.UserRepository;
 import com.example.creditmarket.service.MyPageService;
@@ -17,6 +20,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +32,7 @@ public class MyPageServiceImpl implements MyPageService {
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
     private final FavoriteRepository favoriteRepository;
+    private final OptionRepository optionRepository;
 
     public List<FavoriteResponseDTO> selectFavoriteList(int page, String userEmail) {
         EntityUser user = userRepository.findById(userEmail)
@@ -40,9 +45,17 @@ public class MyPageServiceImpl implements MyPageService {
 
         List<EntityFavorite> favorites = favoriteRepository.findByUser(user, pageRequest);
 
-        return favorites.stream()
-                .map(FavoriteResponseDTO::new)
-                .collect(Collectors.toList());
+        List<FavoriteResponseDTO> list = new ArrayList<>();
+        for (EntityFavorite favorite : favorites) {
+            FavoriteResponseDTO dto = FavoriteResponseDTO.builder()
+                    .favorite(favorite)
+                    .option(optionRepository.findByProductId(favorite.getFproduct().getFproduct_id()))
+                    .build();
+
+            list.add(dto);
+        }
+
+        return list;
     }
 
     public List<OrderResponseDTO> selectOrderList(int page, String userEmail) {
@@ -56,9 +69,17 @@ public class MyPageServiceImpl implements MyPageService {
 
         List<EntityOrder> orders = orderRepository.findByUser(user, pageRequest);
 
-        return orders.stream()
-                .map(OrderResponseDTO::new)
-                .collect(Collectors.toList());
+        List<OrderResponseDTO> list = new ArrayList<>();
+        for (EntityOrder order : orders) {
+            OrderResponseDTO dto = OrderResponseDTO.builder()
+                    .order(order)
+                    .option(optionRepository.findByProductId(order.getFproduct().getFproduct_id()))
+                    .build();
+
+            list.add(dto);
+        }
+
+        return list;
     }
 
     @Override
