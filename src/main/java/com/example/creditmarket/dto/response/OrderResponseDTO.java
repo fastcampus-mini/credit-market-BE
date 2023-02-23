@@ -1,6 +1,8 @@
 package com.example.creditmarket.dto.response;
 
+import com.example.creditmarket.entity.EntityOption;
 import com.example.creditmarket.entity.EntityOrder;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -12,17 +14,24 @@ public class OrderResponseDTO {
 
     private int orderStatus;
 
-    private String fproductCompanyName;
+    private String companyName;
 
-    private String fproductName;
+    private String productName;
 
-    private String fproductCreditProductTypeName;
+    private String productTypeName;
 
-    public OrderResponseDTO(EntityOrder order) {
+    private Double avgInterest;
+
+    private String optionsInterestType;
+
+    @Builder
+    public OrderResponseDTO(EntityOrder order, EntityOption option) {
         this.orderId = order.getOrderId();
         this.orderStatus = order.getOrderStatus();
-        this.fproductCompanyName = order.getFproduct().getFproduct_company_name();
-        this.fproductName = order.getFproduct().getFproduct_name();
-        this.fproductCreditProductTypeName = order.getFproduct().getFproduct_credit_product_type_name();
+        this.companyName = order.getFproduct().getFproduct_company_name();
+        this.productName = order.getFproduct().getFproduct_name();
+        this.productTypeName = order.getFproduct().getFproduct_credit_product_type_name();
+        this.avgInterest = option.getOptions_crdt_grad_avg();
+        this.optionsInterestType = option.getOptions_interest_type();
     }
 }

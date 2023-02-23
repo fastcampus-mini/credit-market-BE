@@ -1,6 +1,8 @@
 package com.example.creditmarket.dto.response;
 
 import com.example.creditmarket.entity.EntityFavorite;
+import com.example.creditmarket.entity.EntityOption;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -10,16 +12,26 @@ public class FavoriteResponseDTO {
 
     private Long favoriteId;
 
-    private String fproductCompanyName;
+    private String companyName;
 
-    private String fproductName;
+    private String productName;
 
-    private String fproductCreditProductTypeName;
+    private String productTypeName;
 
-    public FavoriteResponseDTO(EntityFavorite favorite) {
+    private String productId;
+
+    private Double avgInterest;
+
+    private String optionsInterestType;
+
+    @Builder
+    public FavoriteResponseDTO(EntityFavorite favorite, EntityOption option) {
         this.favoriteId = favorite.getFavoriteId();
-        this.fproductCompanyName = favorite.getFproduct().getFproduct_company_name();
-        this.fproductName = favorite.getFproduct().getFproduct_name();
-        this.fproductCreditProductTypeName = favorite.getFproduct().getFproduct_credit_product_type_name();
+        this.companyName = favorite.getFproduct().getFproduct_company_name();
+        this.productName = favorite.getFproduct().getFproduct_name();
+        this.productTypeName = favorite.getFproduct().getFproduct_credit_product_type_name();
+        this.productId = favorite.getFproduct().getFproduct_id();
+        this.avgInterest = option.getOptions_crdt_grad_avg();
+        this.optionsInterestType = option.getOptions_interest_type();
     }
 }
