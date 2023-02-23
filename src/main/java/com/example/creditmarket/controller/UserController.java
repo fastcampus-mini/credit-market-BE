@@ -29,8 +29,8 @@ public class UserController {
 
     @PostMapping("/userlogin")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody UserLoginRequestDTO request) {
-        String token = userservice.login(request.getUserEmail(), request.getUserPassword());
-        return ResponseEntity.ok().body(new LoginResponseDTO(request.getUserEmail(), token));
+        LoginResponseDTO loginReturn = userservice.login(request.getUserEmail(), request.getUserPassword());
+        return ResponseEntity.ok().body(loginReturn);
     }
 
     @PostMapping("/AuthorizationTest")

@@ -1,6 +1,5 @@
 package com.example.creditmarket.dto.response;
 
-import com.example.creditmarket.entity.EntityUser;
 import lombok.Getter;
 
 
@@ -8,12 +7,12 @@ import lombok.Getter;
 public class LoginResponseDTO {
 
 
-    private String userEmail;
+    private String userName;
 
     private String token;
 
-    public LoginResponseDTO(String userEmail, String token){
-        this.userEmail = userEmail;
+    public LoginResponseDTO(String userName, String token){
+        this.userName = userName;
         this.token = token;
 
     }
