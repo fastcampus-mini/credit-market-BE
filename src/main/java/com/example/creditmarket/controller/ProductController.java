@@ -20,8 +20,9 @@ public class ProductController {
 
     @ApiOperation(value = "상품 상세페이지", notes = "상품의 상세페이지를 보여줍니다.")
     @GetMapping("/item/{id}")
-    public ProductDetailResponseDTO itemDetail(@PathVariable String id){
-        return productService.getProductDetail(id);
+    public ProductDetailResponseDTO itemDetail(@PathVariable String id, Authentication authentication){
+        String userEmail = authentication.getName();
+        return productService.getProductDetail(id,userEmail);
     }
 
     @ApiOperation(value = "상품 구매", notes = "상품을 구매(신청)합니다.")
