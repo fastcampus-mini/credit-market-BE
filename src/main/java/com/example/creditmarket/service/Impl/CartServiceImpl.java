@@ -39,6 +39,10 @@ public class CartServiceImpl implements CartService {
         EntityFProduct fProduct = fProductRespository.findById(fproductId)
                 .orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND, fproductId + " 존재하지 않는 상품입니다."));
 
+        if (cartRepository.existsByUserAndFproduct(user, fProduct)) {
+            return "isDupl";
+        }
+
         EntityCart cart = EntityCart.builder()
                 .user(user)
                 .fproduct(fProduct)
