@@ -2,6 +2,7 @@ package com.example.creditmarket.controller;
 
 import com.example.creditmarket.dto.request.UserLoginRequestDTO;
 import com.example.creditmarket.dto.request.UserSignUpRequestDTO;
+import com.example.creditmarket.dto.response.LoginResponseDTO;
 import com.example.creditmarket.entity.EntityUser;
 import com.example.creditmarket.service.Impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +28,9 @@ public class UserController {
     }
 
     @PostMapping("/userlogin")
-    public ResponseEntity<String> login(@RequestBody UserLoginRequestDTO request) {
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody UserLoginRequestDTO request) {
         String token = userservice.login(request.getUserEmail(), request.getUserPassword());
-        return ResponseEntity.ok().body(token);
+        return ResponseEntity.ok().body(new LoginResponseDTO(request.getUserEmail(), token));
     }
 
     @PostMapping("/AuthorizationTest")
