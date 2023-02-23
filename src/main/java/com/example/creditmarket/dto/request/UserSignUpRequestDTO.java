@@ -11,9 +11,9 @@ public class UserSignUpRequestDTO {
 
     private String userEmail;
     private String userPassword;
+    private String userName;
     private String userGender;
     private String userBirthDate;
-    private String userName;
     private String userJob;
     private String userPrefCreditProductTypeName;
     private String userPrefInterestType;

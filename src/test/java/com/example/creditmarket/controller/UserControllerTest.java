@@ -51,6 +51,7 @@ class UserControllerTest {
     void signup() throws Exception{
         String userEmail = "test@Email.com";
         String userPassword = "testPassword";
+        String userName ="패캠";
         String userGender = "남";
         String userBirthDate = "20010101";
         String userJob = "학생";
@@ -61,7 +62,7 @@ class UserControllerTest {
         mockMvc.perform(post("/usersignup")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(new UserSignUpRequestDTO(userEmail, userPassword, userGender, userBirthDate, userJob, userPrefCreditProductTypeName, userPrefInterestType, userCreditScore))))
+                        .content(objectMapper.writeValueAsString(new UserSignUpRequestDTO(userEmail, userPassword, userName, userGender, userBirthDate, userJob, userPrefCreditProductTypeName, userPrefInterestType, userCreditScore))))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
@@ -73,6 +74,7 @@ class UserControllerTest {
     void signup_fail() throws Exception{
         String userEmail = "test@Email.com";
         String userPassword = "testPassword";
+        String userName ="패캠";
         String userGender = "남";
         String userBirthDate = "20010101";
         String userJob = "학생";
@@ -86,7 +88,7 @@ class UserControllerTest {
         mockMvc.perform(post("/usersignup")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(new UserSignUpRequestDTO(userEmail, userPassword, userGender, userBirthDate, userJob, userPrefCreditProductTypeName, userPrefInterestType, userCreditScore))))
+                        .content(objectMapper.writeValueAsString(new UserSignUpRequestDTO(userEmail, userPassword,userName, userGender, userBirthDate, userJob, userPrefCreditProductTypeName, userPrefInterestType, userCreditScore))))
                 .andDo(print())
                 .andExpect(status().isConflict());
     }
@@ -173,6 +175,7 @@ class UserControllerTest {
         UserSignUpRequestDTO testUser = new UserSignUpRequestDTO(
                 "test@Email.com",
                 "testPassword",
+                "패캠",
                 "남",
                 "20010101",
                 "학생",
@@ -210,6 +213,7 @@ class UserControllerTest {
         UserSignUpRequestDTO testUser = new UserSignUpRequestDTO(
                 "test@Email.com",
                 "testPassword",
+                "패캠",
                 "남",
                 "20010101",
                 "학생",
@@ -240,6 +244,7 @@ class UserControllerTest {
         UserSignUpRequestDTO testUser = new UserSignUpRequestDTO(
                 "test@Email.com",
                 "testPassword",
+                "패캠",
                 "남",
                 "20010101",
                 "학생",
@@ -251,6 +256,7 @@ class UserControllerTest {
 
         String userEmail = "test@Email.com";
         String userPassword = "testPassword2";
+        String userName = "패캠";
         String userGender = "남";
         String userBirthDate = "20020101";
         String userJob = "직장인";
@@ -261,7 +267,7 @@ class UserControllerTest {
         mockMvc.perform(post("/userinfoupdate")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(new UserSignUpRequestDTO(userEmail, userPassword, userGender, userBirthDate, userJob, userPrefCreditProductTypeName, userPrefInterestType, userCreditScore))))
+                        .content(objectMapper.writeValueAsString(new UserSignUpRequestDTO(userEmail, userPassword, userName, userGender, userBirthDate, userJob, userPrefCreditProductTypeName, userPrefInterestType, userCreditScore))))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
