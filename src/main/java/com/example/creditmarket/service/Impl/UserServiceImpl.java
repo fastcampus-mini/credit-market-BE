@@ -1,6 +1,7 @@
 package com.example.creditmarket.service.Impl;
 
 import com.example.creditmarket.dto.request.UserSignUpRequestDTO;
+import com.example.creditmarket.dto.response.LoginResponseDTO;
 import com.example.creditmarket.entity.EntityToken;
 import com.example.creditmarket.entity.EntityUser;
 import com.example.creditmarket.exception.AppException;
@@ -56,7 +57,7 @@ public class UserServiceImpl implements UserService {
         return "success";
     }
 
-    public String login(String userEmail, String password){
+    public LoginResponseDTO login(String userEmail, String password){
         //userEmail 없음
         EntityUser selectedUser = userRepository.findByUserEmail(userEmail)
                 .orElseThrow(()->new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
@@ -67,7 +68,7 @@ public class UserServiceImpl implements UserService {
         }
 
         String token = JwtUtil.createToken(selectedUser.getUserEmail(), secretKey, expiredMs);
-        return token;
+        return new LoginResponseDTO(selectedUser.getUserName(), token);
     }
 
     public Boolean isValid(String userToken){

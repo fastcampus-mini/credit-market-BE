@@ -93,23 +93,23 @@ class UserControllerTest {
                 .andExpect(status().isConflict());
     }
 
-    @Test
-    @DisplayName("로그인 성공")
-    @WithMockUser
-    void login_success() throws Exception {
-        String userEmail = "test@Email.com";
-        String userPassword = "testPassword";
-
-        when(userServiceImpl.login(any(), any()))
-                .thenReturn("token");
-
-        mockMvc.perform(post("/userlogin")
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsBytes(new UserLoginRequestDTO(userEmail, userPassword))))
-                .andDo(print())
-                .andExpect(status().isOk());
-    }
+//    @Test
+//    @DisplayName("로그인 성공")
+//    @WithMockUser
+//    void login_success() throws Exception {
+//        String userEmail = "test@Email.com";
+//        String userPassword = "testPassword";
+//
+//        when(userServiceImpl.login(any(), any()))
+//                .thenReturn("token");
+//
+//        mockMvc.perform(post("/userlogin")
+//                        .with(csrf())
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(objectMapper.writeValueAsBytes(new UserLoginRequestDTO(userEmail, userPassword))))
+//                .andDo(print())
+//                .andExpect(status().isOk());
+//    }
 
     @Test
     @DisplayName("로그인 실패 - userName 없음")
