@@ -1,6 +1,7 @@
 package com.example.creditmarket.dto.response;
 
 import com.example.creditmarket.entity.EntityCart;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -10,11 +11,11 @@ public class CartResponseDTO {
 
     private Long cartId;
 
-    private String fproductCompanyName;
+    private String companyName;
 
-    private String fproductName;
+    private String productName;
 
-    private String fproductCreditProductTypeName;
+    private String productId;
 
     private boolean favorite;
 
@@ -22,10 +23,11 @@ public class CartResponseDTO {
         this.favorite = favorite;
     }
 
+    @Builder
     public CartResponseDTO(EntityCart cart) {
         this.cartId = cart.getCartId();
-        this.fproductCompanyName = cart.getFproduct().getFproduct_company_name();
-        this.fproductName = cart.getFproduct().getFproduct_name();
-        this.fproductCreditProductTypeName = cart.getFproduct().getFproduct_credit_product_type_name();
+        this.companyName = cart.getFproduct().getFproduct_company_name();
+        this.productName = cart.getFproduct().getFproduct_name();
+        this.productId = cart.getFproduct().getFproduct_id();
     }
 }
