@@ -7,6 +7,7 @@ import com.example.creditmarket.service.Impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,5 +53,11 @@ public class UserController {
     public ResponseEntity<String> infoUpdate(@RequestBody UserSignUpRequestDTO request){
         userservice.infoUpdate(request.toEntity());
         return ResponseEntity.ok().body("INFO_UPDATE_SUCCESS");
+    }
+
+    @GetMapping("/userinfo")
+    public ResponseEntity<EntityUser> getUserInfo(HttpServletRequest request){
+        EntityUser user = userservice.getUserInfo(request);
+        return ResponseEntity.ok().body(user);
     }
 }

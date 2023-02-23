@@ -101,7 +101,6 @@ class UserControllerTest {
         when(userServiceImpl.login(any(), any()))
                 .thenReturn("token");
 
-
         mockMvc.perform(post("/userlogin")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -120,7 +119,6 @@ class UserControllerTest {
         when(userServiceImpl.login(any(), any()))
                 .thenThrow(new AppException(ErrorCode.USERMAIL_NOT_FOUND, ""));
 
-
         mockMvc.perform(post("/userlogin")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -138,7 +136,6 @@ class UserControllerTest {
 
         when(userServiceImpl.login(any(), any()))
                 .thenThrow(new AppException(ErrorCode.INVALID_PASSWORD, ""));
-
 
         mockMvc.perform(post("/userlogin")
                         .with(csrf())

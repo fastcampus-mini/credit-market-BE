@@ -18,4 +18,6 @@ public interface UserService {
     public EntityUser passwordCheck(String userEmail, String password);
 
     public String infoUpdate(EntityUser user);
+
+    public EntityUser getUserInfo(HttpServletRequest request);
 }
