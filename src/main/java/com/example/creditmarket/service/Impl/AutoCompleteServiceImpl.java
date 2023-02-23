@@ -21,7 +21,6 @@ public class AutoCompleteServiceImpl implements AutoCompleteService {
     private final OptionRepository optionRepository;
     private final AutoCompleteUtil root = new AutoCompleteUtil();
 
-
     public List<String> getAutoComplete(String prefix) {
         return root.getWordsWithPrefix(prefix);
     }

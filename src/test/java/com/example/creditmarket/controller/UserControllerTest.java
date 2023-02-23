@@ -1,7 +1,7 @@
 package com.example.creditmarket.controller;
 
 import com.example.creditmarket.dto.request.UserLoginRequestDTO;
-import com.example.creditmarket.dto.response.UserSignUpRequestDTO;
+import com.example.creditmarket.dto.request.UserSignUpRequestDTO;
 import com.example.creditmarket.entity.EntityUser;
 import com.example.creditmarket.exception.AppException;
 import com.example.creditmarket.exception.ErrorCode;

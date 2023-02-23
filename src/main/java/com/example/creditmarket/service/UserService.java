@@ -1,6 +1,6 @@
 package com.example.creditmarket.service;
 
-import com.example.creditmarket.dto.response.UserSignUpRequestDTO;
+import com.example.creditmarket.dto.request.UserSignUpRequestDTO;
 import com.example.creditmarket.entity.EntityUser;
 
 import javax.servlet.http.HttpServletRequest;

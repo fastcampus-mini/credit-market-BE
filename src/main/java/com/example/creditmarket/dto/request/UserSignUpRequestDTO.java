@@ -1,4 +1,4 @@
-package com.example.creditmarket.dto.response;
+package com.example.creditmarket.dto.request;
 
 import com.example.creditmarket.entity.EntityUser;
 import lombok.AllArgsConstructor;
@@ -13,6 +13,7 @@ public class UserSignUpRequestDTO {
     private String userPassword;
     private String userGender;
     private String userBirthDate;
+    private String userName;
     private String userJob;
     private String userPrefCreditProductTypeName;
     private String userPrefInterestType;
@@ -22,6 +23,7 @@ public class UserSignUpRequestDTO {
         return EntityUser.builder()
                 .userEmail(userEmail)
                 .userPassword(userPassword)
+                .userName(userName)
                 .userGender(userGender)
                 .userBirthdate(userBirthDate)
                 .userJob(userJob)
