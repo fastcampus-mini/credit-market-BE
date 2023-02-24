@@ -3,8 +3,7 @@
 # :moneybag: [Credit Market (Demo)](https://credit-market.netlify.app/)
 
 - :page_with_curl: Check out project documents at [<img src="https://img.shields.io/badge/Notion-000000?style=flat-round&logo=Notion&logoColor=white"/>](https://www.notion.so/Mini-Project-b53fa0f445ce4afbacebffd01a813965?pvs=4)
-- :triangular_ruler: Check out project structures at [<img src="https://img.shields.io/badge/Github Wiki-181717?style=flat-round&logo=Github&logoColor=white"/>](https://github.com/fastcampus-mini/credit-market-FE/wiki/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%EC%A1%B0)
- 
+
 <br/>
 
 ## :hammer: 기술 스택 (Technologies Used)
