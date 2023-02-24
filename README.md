@@ -24,13 +24,6 @@
 <br/><br/>
 
 
-## :triangular_ruler: 프로젝트 구조 (Project Structures)
-
-
-<br/><br/>
-
-
-
 ## :floppy_disk: ER 다이어그램 (ER-Diagram with Cardinality Constraints)
 ![image](https://user-images.githubusercontent.com/113500771/220917801-e1ff7958-75fd-44bc-b1ac-df7ada534ed9.png)
 
