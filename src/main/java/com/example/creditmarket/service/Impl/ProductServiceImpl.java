@@ -87,8 +87,9 @@ public class ProductServiceImpl implements ProductService {
         List<EntityFProduct> products = productRepository.findProductsByUserPref(user.getUserPrefCreditProductTypeName());
         for (EntityFProduct pr : products) {
             EntityOption op = optionRepository.findOptionByProductIdAndType(pr.getFproduct_id(), user.getUserPrefInterestType());
+            boolean isFavorite = favoriteRepository.existsByUserAndFproduct(user, pr);
             if (op != null) {
-                list.add(new RecommendResponseDTO(pr, op));
+                list.add(new RecommendResponseDTO(pr, op, isFavorite));
             }
         }
         return list;

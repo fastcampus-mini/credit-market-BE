@@ -25,6 +25,8 @@ public class RecommendResponseDTO {
 
     private double avgInterest;
 
+    private boolean favorite;
+
     public RecommendResponseDTO(EntityFProduct product, EntityOption option){
         this.productId = product.getFproduct_id();
         this.companyName = product.getFproduct_company_name();
@@ -32,5 +34,15 @@ public class RecommendResponseDTO {
         this.productTypeName = product.getFproduct_credit_product_type_name();
         this.optionsInterestType = option.getOptions_interest_type();
         this.avgInterest = option.getOptions_crdt_grad_avg();
+    }
+
+    public RecommendResponseDTO(EntityFProduct product, EntityOption option, boolean favorite){
+        this.productId = product.getFproduct_id();
+        this.companyName = product.getFproduct_company_name();
+        this.productName = product.getFproduct_name();
+        this.productTypeName = product.getFproduct_credit_product_type_name();
+        this.optionsInterestType = option.getOptions_interest_type();
+        this.avgInterest = option.getOptions_crdt_grad_avg();
+        this.favorite = favorite;
     }
 }
