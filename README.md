@@ -2,8 +2,8 @@
 
 # :moneybag: [Credit Market (Demo)](https://credit-market.netlify.app/)
 
-- :page_with_curl: Check out project documents at [<img src="https://img.shields.io/badge/Notion-000000?style=flat-round&logo=Notion&logoColor=white"/>](https://www.notion.so/Mini-Project-b53fa0f445ce4afbacebffd01a813965?pvs=4)
-
+- :page_with_curl: Check out our project documents at [<img src="https://img.shields.io/badge/Notion-000000?style=flat-round&logo=Notion&logoColor=white"/>](https://www.notion.so/Mini-Project-b53fa0f445ce4afbacebffd01a813965?pvs=4)
+- :triangular_ruler: Check out our [project structures.md](https://github.com/fastcampus-mini/credit-market-BE/blob/develop/ProjectStructure.md)
 <br/>
 
 ## :hammer: 기술 스택 (Technologies Used)
@@ -25,90 +25,7 @@
 
 
 ## :triangular_ruler: 프로젝트 구조 (Project Structures)
-```
-📁 project/
-   📂 src/
-      📂 main/
-         📂 java/
-            📂 com.example.creditmarket/
-               📂 configuration/
-                  📄 AuthenticationCoonfig.java
-                  📄 EncoderConfig.java
-                  📄 JwtFilter.java
-               📂 controller/
-                  📄 CartController.java
-                  📄 MyPageController.java
-                  📄 ProductController.java
-                  📄 SearchController.java
-                  📄 UserController.java
-               📂 dto/
-                  📂 request/
-                     📄 CartDeleteRequestDTO.java
-                     📄 CartSaveRequestDTO.java
-                     📄 FavoriteRequestDTO.java
-                     📄 OrderRequestDTO.java
-                     📄 OrderSaveRequestDTO.java
-                     📄 UserLoginRequestDTO.java
-                     📄 UserSignUpRequestDTO.java
-                  📂 response/
-                     📄 CartResponseDTO.java
-                     📄 FavoriteResponseDTO.java
-                     📄 LoginResponseDTO.java
-                     📄 MainListResponseDTO.java
-                     📄 OrderResponseDTO.java
-                     📄 ProduuctDetailResponseDTO.java
-                     📄 RecommendResponseDTO.java
-                     📄 UserInfoResponseDTO.java
-               📂 entity/
-                  📄 EntityCart.java
-                  📄 EntityFavorite.java
-                  📄 EntityFProduct.java
-                  📄 EntityOption.java
-                  📄 EntityOrder.java
-                  📄 EntityToken.java
-                  📄 EntityUser.java
-               📂 exception/
-                  📄 AppException.java
-                  📄 ErrorCode.java
-                  📄 ExceptionManager.java
-               📂 openAPI/
-                  📄 CrawlingOpenAPI.java
-                  📄 CrawlingRepositoryFProduct.java
-                  📄 CrawlingRepositoryOption.java
-                  📄 CrawlingService.java
-               📂 repository/
-                  📄 CartRepository.java
-                  📄 FavoriteRepository.java
-                  📄 FProductRepository.java
-                  📄 OptionRepository.java
-                  📄 OrderRepository.java
-                  📄 ProductRepository.java
-                  📄 TokenRepository.java
-                  📄 UserRepository.java
-               📂 service/
-                  📂 Impl/
-                     📄 AutoCompleteServiceImpl.java
-                     📄 CartServiceImpl.java
-                     📄 MyPageServiceImpl.java
-                     📄 ProoductServiceImpl.java
-                     📄 SearchServiceImpl.java
-                     📄 UserServiceImpl.java
-                  📄 AutoCompleteService.java
-                  📄 CartService.java
-                  📄 MyPageService.java
-                  📄 ProductService.java
-                  📄 SearchService.java
-                  📄 UserService.java
-               📂 utils/
-                  📄 JwtUtil.java
-         📂 resources/
-            📄 application.properties
-      📂 test/
-         📂 java/
-            📂 com.example.creditmarket/
-               📂 controller/
-                  📄 UserControllerTest.java
-```
+
 
 <br/><br/>
 
