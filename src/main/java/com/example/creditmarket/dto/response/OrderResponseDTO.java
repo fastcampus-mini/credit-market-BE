@@ -20,6 +20,8 @@ public class OrderResponseDTO {
 
     private String productTypeName;
 
+    private String productId;
+
     private Double avgInterest;
 
     private String optionsInterestType;
@@ -31,6 +33,7 @@ public class OrderResponseDTO {
         this.companyName = order.getFproduct().getFproduct_company_name();
         this.productName = order.getFproduct().getFproduct_name();
         this.productTypeName = order.getFproduct().getFproduct_credit_product_type_name();
+        this.productId = order.getFproduct().getFproduct_id();
         this.avgInterest = option.getOptions_crdt_grad_avg();
         this.optionsInterestType = option.getOptions_interest_type();
     }
