@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 public class CartSaveRequestDTO {
 
-    private String fproductId;
+    private String productId;
 
 }
