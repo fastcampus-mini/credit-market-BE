@@ -21,4 +21,6 @@ public interface UserService {
     public String infoUpdate(EntityUser user);
 
     public EntityUser getUserInfo(HttpServletRequest request);
+
+    String sendEmailAuth(String userEmail);
 }
