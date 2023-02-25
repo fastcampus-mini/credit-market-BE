@@ -35,7 +35,7 @@ public class AuthenticationConfig {
                 .csrf().disable()
                 .cors().and()
                 .authorizeRequests()
-                .antMatchers("/usersignup", "/userlogin", "/search/**", "/item/**").permitAll()
+                .antMatchers("/usersignup", "/userlogin", "/search/**", "/item/**","/sendmail").permitAll()
                 .antMatchers(HttpMethod.POST, "/**").authenticated()
                 .and()
                 .sessionManagement()

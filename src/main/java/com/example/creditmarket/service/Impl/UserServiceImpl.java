@@ -10,10 +10,13 @@ import com.example.creditmarket.repository.TokenRepository;
 import com.example.creditmarket.repository.UserRepository;
 import com.example.creditmarket.service.UserService;
 import com.example.creditmarket.utils.JwtUtil;
+import com.example.creditmarket.utils.RandomCertNumber;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,10 +31,12 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final TokenRepository tokenRepository;
     private final BCryptPasswordEncoder encoder;
+    private final JavaMailSender mailSender;
+
 
     @Value("${jwt.token.secret}")
     private String secretKey;
-    private Long expiredMs = 1000 * 60 * 60 * 24 * 7L ; //일주일
+    private Long expiredMs = 1000 * 60 * 60 * 24 * 7L; //일주일
 
     public String signup(UserSignUpRequestDTO request) {
 
@@ -57,10 +62,10 @@ public class UserServiceImpl implements UserService {
         return "success";
     }
 
-    public LoginResponseDTO login(String userEmail, String password){
+    public LoginResponseDTO login(String userEmail, String password) {
         //userEmail 없음
         EntityUser selectedUser = userRepository.findByUserEmail(userEmail)
-                .orElseThrow(()->new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
+                .orElseThrow(() -> new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
 
         //password 틀림
         if (!encoder.matches(password, selectedUser.getUserPassword())) { //순서 중요. inputpassword, DBpassword
@@ -71,12 +76,12 @@ public class UserServiceImpl implements UserService {
         return new LoginResponseDTO(selectedUser.getUserName(), token);
     }
 
-    public Boolean isValid(String userToken){
+    public Boolean isValid(String userToken) {
         //userToken 없음
         return tokenRepository.findByToken(userToken) == null;
     }
 
-    public String logout(HttpServletRequest request){
+    public String logout(HttpServletRequest request) {
         // userToken 없음
         // Token 꺼내기
         String token = request.getHeader(HttpHeaders.AUTHORIZATION).split(" ")[1].trim();
@@ -84,10 +89,10 @@ public class UserServiceImpl implements UserService {
         return "LOGOUT_SUCCESS";
     }
 
-    public EntityUser passwordCheck(String userEmail, String password){
+    public EntityUser passwordCheck(String userEmail, String password) {
         //userEmail 없음
         EntityUser selectedUser = userRepository.findByUserEmail(userEmail)
-                .orElseThrow(()->new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
+                .orElseThrow(() -> new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
 
         //password 틀림
         if (!encoder.matches(password, selectedUser.getUserPassword())) { //순서 중요. inputpassword, DBpassword
@@ -96,18 +101,37 @@ public class UserServiceImpl implements UserService {
         return selectedUser;
     }
 
-    public String infoUpdate(EntityUser user){
+    public String infoUpdate(EntityUser user) {
         userRepository.save(user);
         return "success";
     }
 
-    public EntityUser getUserInfo(HttpServletRequest request){
+    public EntityUser getUserInfo(HttpServletRequest request) {
         // userToken 없음
         // Token 꺼내기
         String token = request.getHeader(HttpHeaders.AUTHORIZATION).split(" ")[1].trim();
         String userEmail = JwtUtil.getUserEmail(token, secretKey);
         EntityUser selectedUser = userRepository.findByUserEmail(userEmail)
-                .orElseThrow(()->new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
+                .orElseThrow(() -> new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
         return selectedUser;
+    }
+
+    @Override
+    public String sendEmailAuth(String userEmail) {
+        if (!userRepository.existsById(userEmail)) {
+            throw new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다.");
+        }
+        String certNum = RandomCertNumber.getCertNum();
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(userEmail); //받는 사람
+        message.setSubject("안녕하세요. Credit Market입니다."); //제목
+        message.setText("인증번호는 [" + certNum + "]입니다."); //내용
+        message.setFrom("wpdud2003@gmail.com"); //보내는 사람
+        log.info("certNum={}", certNum);
+
+        mailSender.send(message);
+
+        return certNum;
     }
 }
