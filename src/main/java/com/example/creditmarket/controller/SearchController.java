@@ -1,14 +1,15 @@
 package com.example.creditmarket.controller;
 
 import com.example.creditmarket.dto.response.MainListResponseDTO;
+import com.example.creditmarket.service.AutoCompleteService;
+import com.example.creditmarket.service.Impl.AutoCompleteServiceImpl;
 import com.example.creditmarket.service.Impl.SearchServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.Nullable;
 import io.swagger.annotations.Api;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -17,6 +18,8 @@ import java.util.List;
 public class SearchController {
 
     private final SearchServiceImpl searchServiceImpl;
+
+    private final AutoCompleteService autoCompleteService;
 
     @GetMapping("/search/results")
     public List<MainListResponseDTO> searchKeyword(@RequestParam(required = false, defaultValue = "") @Nullable String keyword,
@@ -34,5 +37,10 @@ public class SearchController {
         }
         userEmail = authentication.getPrincipal().toString();
         return searchServiceImpl.searchResult(keyword.trim(), loan.trim(), age.trim(), gender.trim(), interest.trim(), rate, userEmail, (page-1));
+    }
+
+    @PostMapping("/search/autocomplete")
+    public List<String> getAutoComplete(@RequestBody @Nullable String prefix) {
+        return autoCompleteService.getAutoComplete(prefix);
     }
 }
