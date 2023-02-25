@@ -66,4 +66,11 @@ public class UserController {
 
         return ResponseEntity.ok().body(result);
     }
+
+    @PostMapping("/newpassword")
+    public ResponseEntity<String> sendNewPassword(@RequestBody UserSendMailRequestDTO requestDTO) {
+        String newPassword = userservice.sendNewPasswordAuth(requestDTO.getUserEmail());
+
+        return ResponseEntity.ok().body(newPassword);
+    }
 }

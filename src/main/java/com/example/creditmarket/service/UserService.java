@@ -23,4 +23,6 @@ public interface UserService {
     public EntityUser getUserInfo(HttpServletRequest request);
 
     String sendEmailAuth(String userEmail);
+
+    String sendNewPasswordAuth(String userEmail);
 }

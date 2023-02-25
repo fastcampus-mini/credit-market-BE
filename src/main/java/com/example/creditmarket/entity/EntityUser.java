@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Table(name = "tb_user")
 @NoArgsConstructor
-@Getter
+@Data
 @Builder
 public class EntityUser {
 

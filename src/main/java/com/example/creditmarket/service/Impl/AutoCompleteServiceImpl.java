@@ -22,11 +22,19 @@ public class AutoCompleteServiceImpl implements AutoCompleteService {
     private final AutoCompleteUtil root = new AutoCompleteUtil();
 
     public List<String> getAutoComplete(String prefix) {
-        return root.getWordsWithPrefix(prefix);
+        AutoCompleteUtil current = root;
+        for (int i = 0; i < prefix.length(); i++) {
+            char ch = prefix.charAt(i);
+            if (!current.children.containsKey(ch)) {
+                return Collections.emptyList();
+            }
+            current = current.children.get(ch);
+        }
+        return current.getWordsWithPrefix(prefix);
     }
 
     @PostConstruct
-    public void addKeywords() {
+    public void addKeywords() { // 금융회사명, 금융상품명, 대출종류명, 금리구분
         List<String> companyNames = fProductRespository.findAll().stream()
                 .map(EntityFProduct::getFproduct_company_name)
                 .filter(Objects::nonNull)
@@ -85,7 +93,7 @@ public class AutoCompleteServiceImpl implements AutoCompleteService {
 //            "OK저축은행", "㈜우리카드", "하나카드㈜", "하나은행",
 //            "주식회사 케이뱅크", "수협은행", "주식회사 카카오뱅크", "토스뱅크 주식회사",
 //
-////          금융상품명"
+////          금융상품명
 //            "협약금리 外 신용대출상품", "개인신용대출", "장기카드대출", "일반신용대출",
 //            "마이너스한도대출", "ONE신용대출", "개인신용대출2", "가계일반자금대출",
 //            "평생종합통장", "개인신용대출(신규대출취급중단)", "Easy 직장인 프로미론", "개인신용대출(일반신용대출)",
