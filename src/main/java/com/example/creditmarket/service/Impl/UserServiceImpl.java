@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
     private String secretKey;
     private Long expiredMs = 1000 * 60 * 60 * 24 * 7L; //일주일
 
+    @Override
     public String signup(UserSignUpRequestDTO request) {
 
         //userEmail 중복 체크
@@ -62,6 +63,7 @@ public class UserServiceImpl implements UserService {
         return "success";
     }
 
+    @Override
     public LoginResponseDTO login(String userEmail, String password) {
         //userEmail 없음
         EntityUser selectedUser = userRepository.findByUserEmail(userEmail)
@@ -76,11 +78,13 @@ public class UserServiceImpl implements UserService {
         return new LoginResponseDTO(selectedUser.getUserName(), token);
     }
 
+    @Override
     public Boolean isValid(String userToken) {
         //userToken 없음
         return tokenRepository.findByToken(userToken) == null;
     }
 
+    @Override
     public String logout(HttpServletRequest request) {
         // userToken 없음
         // Token 꺼내기
@@ -89,6 +93,7 @@ public class UserServiceImpl implements UserService {
         return "LOGOUT_SUCCESS";
     }
 
+    @Override
     public EntityUser passwordCheck(String userEmail, String password) {
         //userEmail 없음
         EntityUser selectedUser = userRepository.findByUserEmail(userEmail)
@@ -101,11 +106,13 @@ public class UserServiceImpl implements UserService {
         return selectedUser;
     }
 
+    @Override
     public String infoUpdate(EntityUser user) {
         userRepository.save(user);
         return "success";
     }
 
+    @Override
     public EntityUser getUserInfo(HttpServletRequest request) {
         // userToken 없음
         // Token 꺼내기
@@ -121,7 +128,7 @@ public class UserServiceImpl implements UserService {
         if (!userRepository.existsById(userEmail)) {
             throw new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다.");
         }
-        String certNum = RandomCertNumber.getCertNum();
+        String certNum = RandomCertNumber.getCertNum(5);
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(userEmail); //받는 사람
@@ -133,5 +140,28 @@ public class UserServiceImpl implements UserService {
         mailSender.send(message);
 
         return certNum;
+    }
+
+    @Override
+    public String sendNewPasswordAuth(String userEmail) {
+        if (!userRepository.existsById(userEmail)) {
+            throw new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다.");
+        }
+        String newPassword = RandomCertNumber.getCertNum(10);
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(userEmail); //받는 사람
+        message.setSubject("안녕하세요. Credit Market입니다."); //제목
+        message.setText("임시 비밀번호는 [" + newPassword + "]입니다."); //내용
+        message.setFrom("wpdud2003@gmail.com"); //보내는 사람
+        log.info("certNum={}", newPassword);
+
+        EntityUser userInfo = userRepository.findByUserEmail(userEmail).get();
+        userInfo.setUserPassword(encoder.encode(newPassword));
+        userRepository.save(userInfo);
+
+        mailSender.send(message);
+
+        return newPassword;
     }
 }

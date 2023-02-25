@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class AutoCompleteUtil {
 
-    private Map<Character, AutoCompleteUtil> children;
+    public Map<Character, AutoCompleteUtil> children;
     private boolean isEndOfWord;
 
 
@@ -31,26 +31,20 @@ public class AutoCompleteUtil {
     public List<String> getWordsWithPrefix(String prefix) {
         AutoCompleteUtil current = this;
         List<String> words = new ArrayList<>();
-        for (int i = 0; i < prefix.length(); i++) {
-            char ch = prefix.charAt(i);
-            if (!current.children.containsKey(ch)) {
-                return words;
-            }
-            current = current.children.get(ch);
-        }
-        getWords(current, new StringBuilder(prefix), words);
+        getWords(current, new StringBuilder(prefix), prefix, words);
         return words;
     }
 
-    private void getWords(AutoCompleteUtil node, StringBuilder prefix, List<String> words) {
-        if (node.isEndOfWord) {
+
+    private void getWords(AutoCompleteUtil node, StringBuilder prefix, String inputPrefix, List<String> words) {
+        if (node.isEndOfWord && prefix.toString().startsWith(inputPrefix)) {
             words.add(prefix.toString());
         }
         for (Map.Entry<Character, AutoCompleteUtil> entry : node.children.entrySet()) {
             char ch = entry.getKey();
             AutoCompleteUtil child = entry.getValue();
             prefix.append(ch);
-            getWords(child, prefix, words);
+            getWords(child, prefix, inputPrefix, words);
             prefix.deleteCharAt(prefix.length() - 1);
         }
     }

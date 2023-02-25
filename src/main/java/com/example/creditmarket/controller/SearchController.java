@@ -1,5 +1,6 @@
 package com.example.creditmarket.controller;
 
+import com.example.creditmarket.dto.request.AutoCompleteRequestDTO;
 import com.example.creditmarket.dto.response.MainListResponseDTO;
 import com.example.creditmarket.service.AutoCompleteService;
 import com.example.creditmarket.service.Impl.AutoCompleteServiceImpl;
@@ -19,7 +20,7 @@ public class SearchController {
 
     private final SearchServiceImpl searchServiceImpl;
 
-    private final AutoCompleteService autoCompleteService;
+    private final AutoCompleteServiceImpl autoCompleteService;
 
     @GetMapping("/search/results")
     public List<MainListResponseDTO> searchKeyword(@RequestParam(required = false, defaultValue = "") @Nullable String keyword,
@@ -40,7 +41,11 @@ public class SearchController {
     }
 
     @PostMapping("/search/autocomplete")
-    public List<String> getAutoComplete(@RequestBody @Nullable String prefix) {
-        return autoCompleteService.getAutoComplete(prefix);
+    public List<String> getAutoComplete(@RequestBody @Nullable AutoCompleteRequestDTO autoCompleteRequestDTO) {
+        String prefix = autoCompleteRequestDTO.getPrefix();
+        System.out.println("prefix = " + prefix);
+        List<String> result = autoCompleteService.getAutoComplete(prefix);
+        System.out.println("result = " + result);
+        return result;
     }
 }
