@@ -35,9 +35,9 @@ public class CartServiceImpl implements CartService {
         EntityUser user = userRepository.findById(userEmail)
                 .orElseThrow(() -> new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
 
-        String fproductId = cartRequestDTO.getFproductId();
-        EntityFProduct fProduct = fProductRespository.findById(fproductId)
-                .orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND, fproductId + " 존재하지 않는 상품입니다."));
+        String productId = cartRequestDTO.getProductId();
+        EntityFProduct fProduct = fProductRespository.findById(productId)
+                .orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND, productId + " 존재하지 않는 상품입니다."));
 
         if (cartRepository.existsByUserAndFproduct(user, fProduct)) {
             return "isDupl";
