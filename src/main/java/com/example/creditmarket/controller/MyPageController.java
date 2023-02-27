@@ -1,6 +1,8 @@
 package com.example.creditmarket.controller;
 
+import com.example.creditmarket.dto.response.FavoriteListResponseDTO;
 import com.example.creditmarket.dto.response.FavoriteResponseDTO;
+import com.example.creditmarket.dto.response.OrderListResponseDTO;
 import com.example.creditmarket.dto.response.OrderResponseDTO;
 import com.example.creditmarket.service.MyPageService;
 import lombok.RequiredArgsConstructor;
@@ -20,15 +22,15 @@ public class MyPageController {
     private final MyPageService myPageService;
 
     @GetMapping("/favor/{page}")
-    public ResponseEntity<List<FavoriteResponseDTO>> selectFavoriteList(@PathVariable int page, Authentication authentication) {
-        List<FavoriteResponseDTO> favoriteList = myPageService.selectFavoriteList(page, authentication.getName());
+    public ResponseEntity<FavoriteListResponseDTO> selectFavoriteList(@PathVariable int page, Authentication authentication) {
+        FavoriteListResponseDTO favoriteList = myPageService.selectFavoriteList(page, authentication.getName());
 
         return ResponseEntity.ok().body(favoriteList);
     }
 
     @GetMapping("/buy/{page}")
-    public ResponseEntity<List<OrderResponseDTO>> selectOrderList(@PathVariable int page, Authentication authentication) {
-        List<OrderResponseDTO> orderList = myPageService.selectOrderList(page, authentication.getName());
+    public ResponseEntity<OrderListResponseDTO> selectOrderList(@PathVariable int page, Authentication authentication) {
+        OrderListResponseDTO orderList = myPageService.selectOrderList(page, authentication.getName());
 
         return ResponseEntity.ok().body(orderList);
     }

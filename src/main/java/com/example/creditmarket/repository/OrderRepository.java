@@ -15,4 +15,7 @@ public interface OrderRepository extends JpaRepository<EntityOrder, Long> {
     List<EntityOrder> findByUser(EntityUser user, Pageable pageable);
 
     Optional<EntityOrder> findByUserAndOrderId(EntityUser user, Long orderId);
+
+    int countByUser(EntityUser user);
+
 }

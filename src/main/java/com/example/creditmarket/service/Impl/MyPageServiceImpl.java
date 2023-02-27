@@ -1,10 +1,10 @@
 package com.example.creditmarket.service.Impl;
 
+import com.example.creditmarket.dto.response.FavoriteListResponseDTO;
 import com.example.creditmarket.dto.response.FavoriteResponseDTO;
+import com.example.creditmarket.dto.response.OrderListResponseDTO;
 import com.example.creditmarket.dto.response.OrderResponseDTO;
-import com.example.creditmarket.dto.response.RecommendResponseDTO;
 import com.example.creditmarket.entity.EntityFavorite;
-import com.example.creditmarket.entity.EntityOption;
 import com.example.creditmarket.entity.EntityOrder;
 import com.example.creditmarket.entity.EntityUser;
 import com.example.creditmarket.exception.AppException;
@@ -22,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -34,7 +33,7 @@ public class MyPageServiceImpl implements MyPageService {
     private final FavoriteRepository favoriteRepository;
     private final OptionRepository optionRepository;
 
-    public List<FavoriteResponseDTO> selectFavoriteList(int page, String userEmail) {
+    public FavoriteListResponseDTO selectFavoriteList(int page, String userEmail) {
         EntityUser user = userRepository.findById(userEmail)
                 .orElseThrow(() -> new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
 
@@ -55,10 +54,16 @@ public class MyPageServiceImpl implements MyPageService {
             list.add(dto);
         }
 
-        return list;
+        int totalNum = favoriteRepository.countByUser(user);
+
+
+        return FavoriteListResponseDTO.builder()
+                .list(list)
+                .totalNum(totalNum)
+                .build();
     }
 
-    public List<OrderResponseDTO> selectOrderList(int page, String userEmail) {
+    public OrderListResponseDTO selectOrderList(int page, String userEmail) {
         EntityUser user = userRepository.findById(userEmail)
                 .orElseThrow(() -> new AppException(ErrorCode.USERMAIL_NOT_FOUND, userEmail + " 존재하지 않는 회원입니다."));
 
@@ -79,7 +84,12 @@ public class MyPageServiceImpl implements MyPageService {
             list.add(dto);
         }
 
-        return list;
+        int totalNum = orderRepository.countByUser(user);
+
+        return OrderListResponseDTO.builder()
+                .list(list)
+                .totalNum(totalNum)
+                .build();
     }
 
     @Override
