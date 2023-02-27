@@ -18,5 +18,7 @@ public interface FavoriteRepository extends JpaRepository<EntityFavorite, Long> 
 
     EntityFavorite findEntityFavoriteByFproductAndUser(EntityFProduct fproduct, EntityUser user);
 
+    int countByUser(EntityUser user);
+
 }
 
