@@ -1,6 +1,6 @@
 <center><img width="100%" src="https://i.ibb.co/5vBJ53Z/3.png"></center>
 
-# :moneybag: [Credit Market (Demo)](https://credit-market.netlify.app/)
+# :moneybag: [Credit Market](https://credit-market.netlify.app/)  (23.02.09.~23.02.25.)
 
 - :page_with_curl: Check out our project documents at [<img src="https://img.shields.io/badge/Notion-000000?style=flat-round&logo=Notion&logoColor=white"/>](https://www.notion.so/Mini-Project-b53fa0f445ce4afbacebffd01a813965?pvs=4)
 - :triangular_ruler: Check out our [project structures.md](https://github.com/fastcampus-mini/credit-market-BE/blob/develop/ProjectStructure.md)
@@ -23,7 +23,7 @@
 
 <br/><br/>
 
-## :pushpin: API 기능명세서 (API Plan)
+## :pushpin: API 기능명세서 (API Documentation)
 ![image](https://user-images.githubusercontent.com/113500771/221785718-0e633f1a-45d6-4884-9db2-2ecce0052dd0.png)
 
 
@@ -137,6 +137,13 @@ This project is licensed under the MIT License.
      </tr>
   </tbody>
 </table>
+
+
+<br/><br/>
+
+
+## :relaxed: 프로젝트 회고(Reflection Report) 
+![image](https://user-images.githubusercontent.com/113500771/221794284-44fefd09-0670-46e9-a75c-89e95b7aac7e.png)
 
 
 <br/><br/>
