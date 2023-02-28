@@ -4,7 +4,20 @@
 
 - :page_with_curl: Check out our project documents at [<img src="https://img.shields.io/badge/Notion-000000?style=flat-round&logo=Notion&logoColor=white"/>](https://www.notion.so/Mini-Project-b53fa0f445ce4afbacebffd01a813965?pvs=4)
 - :triangular_ruler: Check out our [project structures.md](https://github.com/fastcampus-mini/credit-market-BE/blob/develop/ProjectStructure.md)
-<br/>
+
+
+<br/><br/>
+
+
+## :mortar_board: 프로젝트 목표 (Project Goals)
+1. 프론트엔드 개발자분들과의 협업을 경험해보자!
+2. 익숙하지 않은 기능들을 중심으로 역할 분담하여 공부하자!
+3. 현업에 적용할 수 있는 최신 기술들을 사용하자!
+4. 즐기자!!! :satisfied:
+
+
+<br/><br/>
+
 
 ## :hammer: 기술 스택 (Technologies Used)
 ![Java](https://img.shields.io/badge/Java-007396?style=flat-round&logo=Java&logoColor=white)
@@ -22,6 +35,7 @@
 
 
 <br/><br/>
+
 
 ## :pushpin: API 기능명세서 (API Documentation)
 ![image](https://user-images.githubusercontent.com/113500771/221785718-0e633f1a-45d6-4884-9db2-2ecce0052dd0.png)
