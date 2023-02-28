@@ -31,7 +31,7 @@
                      📄 LoginResponseDTO.java
                      📄 MainListResponseDTO.java
                      📄 OrderResponseDTO.java
-                     📄 ProduuctDetailResponseDTO.java
+                     📄 ProductDetailResponseDTO.java
                      📄 RecommendResponseDTO.java
                      📄 UserInfoResponseDTO.java
                📂 entity/
@@ -65,7 +65,7 @@
                      📄 AutoCompleteServiceImpl.java
                      📄 CartServiceImpl.java
                      📄 MyPageServiceImpl.java
-                     📄 ProoductServiceImpl.java
+                     📄 ProductServiceImpl.java
                      📄 SearchServiceImpl.java
                      📄 UserServiceImpl.java
                   📄 AutoCompleteService.java
