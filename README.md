@@ -23,16 +23,47 @@
 
 <br/><br/>
 
-
-## :floppy_disk: ER 다이어그램 (ER-Diagram with Cardinality Constraints)
-![image](https://user-images.githubusercontent.com/113500771/220917801-e1ff7958-75fd-44bc-b1ac-df7ada534ed9.png)
-
+## :pushpin: API 기능명세서 (API Plan)
+![image](https://user-images.githubusercontent.com/113500771/221785718-0e633f1a-45d6-4884-9db2-2ecce0052dd0.png)
 
 
 
 <br/><br/>
 
-## :sunglasses: Member
+
+## :floppy_disk: ER 다이어그램 (ER-Diagram with Cardinality Constraints)
+![image](https://user-images.githubusercontent.com/113500771/220917801-e1ff7958-75fd-44bc-b1ac-df7ada534ed9.png)
+
+
+<br/><br/>
+
+
+## :inbox_tray: 설치 (Installation)
+1. 레포지토리를 클론합니다. 'git clone https://github.com/fastcampus-mini/credit-market-BE.git'
+2. JDK 11이 설치되어 있는 Intellij(또는 다른 IDE)로 실행을합니다.
+
+
+<br/><br/>
+
+
+## :earth_asia: 사용 (Usage)
+1. 웹브라우저를 열고, "http://localhost:8080" 접속
+
+2. 회원가입을 합니다.
+3. 키워드/카테고리 검색을 통해 필요한 대출상품들을 검색한다.
+
+
+<br/><br/>
+
+
+## :unlock: 라이센스 (Licence)
+This project is licensed under the MIT License.
+
+
+<br/><br/>
+
+
+## :sunglasses: Member Coontact Information
 
 <table border>
   <tbody>
