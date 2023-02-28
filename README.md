@@ -53,8 +53,10 @@
 
 
 ## :inbox_tray: 설치 (Installation)
-1. 레포지토리를 클론합니다. 'git clone https://github.com/fastcampus-mini/credit-market-BE.git'
+1. 백엔드 레포지토리를 클론합니다. 'git clone https://github.com/fastcampus-mini/credit-market-BE.git'
 2. JDK 11이 설치되어 있는 Intellij(또는 다른 IDE)로 실행을합니다.
+3. 프론트엔드 레포지토리를 클론합니다. 'git clone https://github.com/fastcampus-mini/credit-market-FE.git'
+4. node.js가 설치되어 있는 상태에서, 해당 경로 터미널에서 'npm run dev' 라고 명령어를 입력합니다.
 
 
 <br/><br/>
@@ -62,9 +64,9 @@
 
 ## :earth_asia: 사용 (Usage)
 1. 웹브라우저를 열고, "http://localhost:8080" 접속
-
 2. 회원가입을 합니다.
-3. 키워드/카테고리 검색을 통해 필요한 대출상품들을 검색한다.
+3. 키워드/카테고리 검색을 통해 필요한 대출상품들을 검색합니다.
+4. 마음에 드는 대출 상품을 찜/장바구니 담기/신청 합니다.
 
 
 <br/><br/>
